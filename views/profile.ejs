@@ -19,7 +19,7 @@
           <nav class="links">
             <ul>
               <li><a href="/">Home</a></li>
-              <li><a href="#">Explore</a></li>
+              <li><a href="/explore">Explore</a></li>
               <li><a href="/create">Create</a></li>
               <!-- <li><a href="#">Tempus</a></li>
               <li><a href="#">Adipiscing</a></li> -->
@@ -56,25 +56,21 @@
                 <li>
                   <a href="/">
                     <h3>Home</h3>
-                    <p>Feugiat tempus veroeros dolor</p>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="/explore">
                     <h3>Explore</h3>
-                    <p>Sed vitae justo condimentum</p>
                   </a>
                 </li>
                 <li>
                   <a href="/create">
                     <h3>Create</h3>
-                    <p>Phasellus sed ultricies mi congue</p>
                   </a>
                 </li>
                 <li>
                   <a href="/signup">
                     <h3>SIGNUP</h3>
-                    <p>Porta lectus amet ultricies</p>
                   </a>
                 </li>
               </ul>
@@ -96,25 +92,27 @@
             <article class="post">
               <header>
                 <div class="title">
-                  <h2><a href="#">Demo Day Project</a></h2>
-                  <p>Login in to contribute your idea</p>
+                  <h2><a href="/profile">Profile Page</a></h2>
+                  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                 </div>
-                <!-- <div class="meta">
-                  <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                  <a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-                </div> -->
               </header>
-              <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/topic">Responded</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/topic">Following</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/topic">Recently Viewed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/topic">Recommended</a>
+                  </li>
+                </ul>
+
               <div class="container">
-
-                  <div class="page-header text-center">
-                      <h1><span class="fa fa-heart"></span> Profile Page</h1>
-                      <a href="/stage" class="btn btn-default btn-sm">Stage</a>
-                      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-                  </div>
-
                   <div class="row">
-
                       <!-- LOCAL INFORMATION -->
                       <div class="col-sm-6">
                           <div class="well">
@@ -137,10 +135,11 @@
                       <div class="col-sm-6">
                         <h3>Activity</h3>
                         <ul class="messages">
+                          <h2>Created Discussions</h2>
                         <% for(var i=0; i<messages.length; i++) {%>
                           <li class="message">
+                            <span><%= user.local.email %></span>
                             <span><%= messages[i].tag %></span>
-                            <span><%= messages[i].bill %></span>
                             <span><%= messages[i].dicuss %></span>
                             <span><%= messages[i].background %></span>
                             <span><%= messages[i].msg %></span>
@@ -153,33 +152,73 @@
                           </li>
                         <% } %>
                         </ul>
-
-
-                      <% if (user.local.email) { %>
-                        <!-- <form action="/messages" method="POST">
-                          <input class="form-control" type="text" placeholder="tag"value="" name="tag">
-                          <input class="form-control" type="text" placeholder="bill" name="bill">
-                          <input class="form-control" placeholder="dicuss" type="text" name="dicuss" value="">
-                          <input class="form-control" placeholder="background" type="text" name="background" value="">
-                          <button type="submit">Submit</button>
-                        </form> -->
+                        <ul class="comments">
+                          <h2>Created Comments</h2>
+                        <% for(var i=0; i<comments.length; i++) {%>
+                          <li class="comments">
+                            <span><%= comments[i].msg %></span>
+                            <span class="hide"><%= comments[i].side %></span>
+                            <span class="hide"><%= comments[i].thumbUp %></span>
+                            <span class="hide"><%= comments[i].thumbDown%></span>
+                            <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
+                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                          </li>
+                        <% } %>
+                        </ul>
                       </div>
-                      <% } %>
-
-              </div>
-
-              <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-              <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
-              <footer>
-                <!-- <ul class="stats">
-                  <li><a href="#">General</a></li>
-                  <li><a href="#" class="icon solid fa-heart">28</a></li>
-                  <li><a href="#" class="icon solid fa-comment">128</a></li>
-                </ul> -->
-              </footer>
-            </article>
-
-        </div>
+                    </div>
+                    <div class="row">
+                        <!-- LOCAL INFORMATION -->
+                        <div class="col-sm-6 well">
+                              <h3><a href="/topic">List Of Recommended Posts</a></h3>
+                              <article class="mini-post">
+          											<header>
+          												<h3><a href="#"><strong>Title:</strong></a></h3>
+          												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+          												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+          											</header>
+          											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
+          										</article>
+                            </div>
+                        <div class="col-sm-6 well">
+                          <h3><a href="/topic">List Of Recently Viewed Posts</a></h3>
+                          <article class="mini-post">
+      											<header>
+      												<h3><a href="#"><strong>Title:</strong></a></h3>
+      												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+      												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+      											</header>
+      											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
+      										</article>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6 well">
+                                <h3><a href="/topic">List Of Follwer's Posts</a></h3>
+                                <article class="mini-post">
+            											<header>
+            												<h3><a href="#"><strong>Title:</strong></a></h3>
+            												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+            												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+            											</header>
+            											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
+            										</article>
+                              </div>
+                          <div class="col-sm-6 well">
+                            <h3><a href="/topic">List Of Discussions you added too</a></h3>
+                            <article class="mini-post">
+        											<header>
+        												<h3><a href="#"><strong>Title:</strong></a></h3>
+        												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+        												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+        											</header>
+        											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
+        										</article>
+                          </div>
+                        </div>
+                  </article>
+                </div>
 
       <!-- Footer -->
         <section id="footer">
@@ -190,7 +229,6 @@
             <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
             <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
           </ul>
-          <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
         </section>
 
     </div>

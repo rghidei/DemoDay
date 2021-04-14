@@ -1,0 +1,21 @@
+
+/* stage */
+.pro, .con{
+  display: inline-block;
+  width: 40%;
+  border: 1px solid black;
+}
+
+
+/* Index */
+ol{
+  background-color: white;
+}
+
+/* Topic */
+#cards{
+  /* background-image: url("images/pic04.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
+  background-color: pink;
+}

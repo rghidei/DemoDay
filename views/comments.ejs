@@ -96,13 +96,10 @@
               <article class="post">
                 <header>
                   <div class="title">
-                    <h2><a href="#">Demo Day Project</a></h2>
+                    <h2><a href="#">comments</a></h2>
                     <p>Create A New Discussion</p>
                   </div>
-                  <!-- <div class="meta">
-                    <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                    <a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-                  </div> -->
+
                 </header>
                 <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
                 <div class="container">
@@ -116,47 +113,40 @@
                     <div class="row">
 
 
-                        <div class="col-sm-6">
-                          <h3>Create Debate Statment</h3>
-                          <!-- <ul class="messages">
-                          <% for(var i=0; i<messages.length; i++) {%>
-                            <li class="message">
-                              <span><%= user.local.email %></span>
-                              <span><%= messages[i].tag %></span>
-                              <span><%= messages[i].dicuss %></span>
-                              <span><%= messages[i].background %></span>
-                              <span class="hide"><%= messages[i].thumbUp %></span>
-                              <span class="hide"><%= messages[i].thumbDown%></span>
-                              <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
-                              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                            </li>
-                          <% } %>
-                          </ul> -->
-
-                          <h2>Enter discussion details</h2>
-                        <% if (user.local.email) { %>
-                          <form action="/create" method="POST">
-                            <input class="form-control" type="text" placeholder="Tag"value="" name="tag">
-                            <input class="form-control" placeholder="Provide a bried title describing your thesis" type="text" name="dicuss" value="">
-                            <input class="form-control" placeholder="Add information revelant to your discussion" type="text" name="background" value="">
-                            <button type="submit">Submit</button>
-                          </form>
-                        </div>
+                      <div class="col-sm-6">
+                        <h3>Add a Comment</h3>
+                        <ul class="comments">
+                        <% for(var i=0; i<comments.length; i++) {%>
+                          <li class="comments">
+                            <span><%= comments[i].msg %></span>
+                            <span><%= comments[i].side %></span>
+                            <span class="hide"><%= comments[i].thumbUp %></span>
+                            <span class="hide"><%= comments[i].thumbDown%></span>
+                            <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
+                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                          </li>
                         <% } %>
+                        </ul>
+
+                      <% if (user.local.email) { %>
+                        <form action="/comments" method="POST">
+                          <input class="form-control" type="text" placeholder="Add Your Comment"value="" name="msg">
+                          <select  name="side">
+                            <option  value="Pro">Pro</option>
+                            <option value="Con">Con</option>
+                          </select>
+
+                          <button type="submit">Submit</button>
+                        </form>
+                      </div>
+                      <% } %>
+
 
                 </div>
 
-                <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
-                <footer>
-                  <!-- <ul class="stats">
-                    <li><a href="#">General</a></li>
-                    <li><a href="#" class="icon solid fa-heart">28</a></li>
-                    <li><a href="#" class="icon solid fa-comment">128</a></li>
-                  </ul> -->
-                </footer>
+
               </article>
 
           </div>

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+
 </head>
 <body class="single is-preload">
 
@@ -19,10 +21,10 @@
           <nav class="links">
             <ul>
               <li><a href="/">Home</a></li>
-              <li><a href="#">Explore</a></li>
+              <li><a href="/explore">Explore</a></li>
               <li><a href="/create">Create</a></li>
-              <!-- <li><a href="#">Tempus</a></li>
-              <li><a href="#">Adipiscing</a></li> -->
+              <!-- <li><a href="/profile">Profile</a></li> -->
+              <!-- <li><a href="/">Adipiscing</a></li> -->
             </ul>
           </nav>
           <nav class="main">
@@ -96,100 +98,82 @@
             <article class="post">
               <header>
                 <div class="title">
-                  <h2><a href="#">Demo Day Project</a></h2>
+                  <h1><span class="fa fa-heart"></span> Stage Page</h1>
                   <p>Login in to contribute your idea</p>
+
+                  <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+
+                  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                 </div>
-                <!-- <div class="meta">
-                  <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                  <a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-                </div> -->
+
               </header>
-              <!-- <span class="image featured"><img src="images/pic01.jpg" alt="" /></span> -->
+
               <div class="container">
 
                   <div class="page-header text-center">
-                      <h1><span class="fa fa-heart"></span> Stage Page</h1>
-                      <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+                    <h3>Discussion</h3>
+                    <ul class="messages">
+                    <% for(var i=0; i<messages.length; i++) {%>
+                      <li class="message">
+                        <span><%= user.local.email %></span>
+                        <span><%= messages[i].tag %></span>
+                        <span><%= messages[i].dicuss %></span>
+                        <span><%= messages[i].background %></span>
+                        <span class="hide"><%= messages[i].thumbUp %></span>
+                        <span class="hide"><%= messages[i].thumbDown%></span>
+                        <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
+                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                      </li>
+                    <% } %>
+                    </ul>
+                    <a href="/comments" class="btn btn-default btn-sm">Add A Comment</a>
 
-                      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                   </div>
 
-                  <div class="row">
-
-                      <!-- LOCAL INFORMATION -->
-
-                      <div class="col-sm-6">
-                        <h3>Discussion</h3>
-                        <ul class="messages">
-                        <% for(var i=0; i<messages.length; i++) {%>
-                          <li class="message">
-                            <span><%= messages[i].tag %></span>
-                            <span><%= messages[i].bill %></span>
-                            <span><%= messages[i].dicuss %></span>
-                            <span><%= messages[i].background %></span>
-                            <span class="hide"><%= messages[i].thumbUp %></span>
-                            <span class="hide"><%= messages[i].thumbDown%></span>
-                            <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
-                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                          </li>
-                        <% } %>
-                        </ul>
-
-
-                      <% if (user.local.email) { %>
-                        <!-- <form action="/messages" method="POST">
-                          <input class="form-control" type="text" placeholder="tag"value="" name="tag">
-                          <input class="form-control" type="text" placeholder="bill" name="bill">
-                          <input class="form-control" placeholder="dicuss" type="text" name="dicuss" value="">
-                          <input class="form-control" placeholder="background" type="text" name="background" value="">
-                          <button type="submit">Submit</button>
-                        </form> -->
-                      </div>
-                      <% } %>
-
-              </div>
-              <div class="col-sm-6">
-                <h3>Add a Comment</h3>
-                <ul class="messages">
-                <% for(var i=0; i<messages.length; i++) {%>
-                  <li class="message">
-                    <span><%= messages[i].msg %></span>
-                    <span class="hide"><%= messages[i].thumbUp %></span>
-                    <span class="hide"><%= messages[i].thumbDown%></span>
-                    <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
-                    <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                    <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                  </li>
-                <% } %>
-                </ul>
+                  <!-- LIST OF COMMENTS pROS AND CONS  -->
+                  <div class="pro">
+                    Pro Comments
+                    <ul class="comments">
+                    <% for(var i=0; i<comments.length; i++) {%>
+                    <% if(comments[i].side === "Pro") { %>
+                      <li class="comments">
+                        <span><%= comments[i].msg %></span>
+                        <span class="hide"><%= comments[i].side %></span>
+                        <span class="hide"><%= comments[i].thumbUp %></span>
+                        <span class="hide"><%= comments[i].thumbDown%></span>
+                        <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
+                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                      </li>
+                    <% }} %>
+                    </ul>
+                  </div>
+                  <div class="con">
+                    Con Comments
+                    <ul class="comments">
+                    <% for(var i=0; i<comments.length; i++) {%>
+                    <% if(comments[i].side === "Con") { %>
+                      <li class="comments">
+                        <span><%= comments[i].msg %></span>
+                        <span class="hide"><%= comments[i].side %></span>
+                        <span class="hide"><%= comments[i].thumbUp %></span>
+                        <span class="hide"><%= comments[i].thumbDown%></span>
+                        <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
+                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+                      </li>
+                    <% }} %>
+                    </ul>
+                  </div>
 
 
-              <% if (user.local.email) { %>
-                <form action="/messages" method="POST">
-                  <input class="form-control" type="text" placeholder="Add Your Comment"value="" name="msg">
-
-                  <button type="submit">Pro</button>
-                  <button type="submit">Con</button>
 
 
-                </form>
-              </div>
-              <% } %>
+
 
       </div>
 
-              <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-              <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
-              <footer>
-                <!-- <ul class="stats">
-                  <li><a href="#">General</a></li>
-                  <li><a href="#" class="icon solid fa-heart">28</a></li>
-                  <li><a href="#" class="icon solid fa-comment">128</a></li>
-                </ul> -->
-              </footer>
             </article>
 
         </div>

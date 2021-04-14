@@ -6,13 +6,44 @@ module.exports = function(app, passport, db) {
     app.get('/', function(req, res) {
         res.render('index.ejs');
     });
-
+    //explore
+    app.get('/explore', function(req, res) {
+        res.render('explore.ejs');
+    });
+    //Topic
+    app.get('/topic', function(req, res) {
+      db.collection('messages').find().toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('topic.ejs', {
+          user : req.user,
+          messages: result,
+          comments: result
+        })
+      })
+      db.collection('comments').find().toArray((err, result) => {
+        if (err) return console.log(err)
+        res.render('topic.ejs', {
+          user : req.user,
+          messages: result,
+          comments: result
+        })
+      })
+    });
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
         db.collection('messages').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
+            messages: result,
+            comments: result
+          })
+        })
+        db.collection('comments').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('profile.ejs', {
+            user : req.user,
+            comments: result,
             messages: result
           })
         })
@@ -33,10 +64,43 @@ module.exports = function(app, passport, db) {
           if (err) return console.log(err)
           res.render('stage.ejs', {
             user : req.user,
+            comments: result,
             messages: result
           })
         })
+        db.collection('comments').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('stage.ejs', {
+            user : req.user,
+            comments: result,
+            messages: result
+
+          })
+        })
     });
+
+
+    //COMMENTS
+    app.get('/comments', isLoggedIn, function(req, res) {
+        db.collection('comments').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('comments.ejs', {
+            user : req.user,
+            comments: result
+          })
+        })
+    });
+
+    //Explore
+    // app.get('/explore', isLoggedIn, function(req, res) {
+    //     db.collection('messages').find().toArray((err, result) => {
+    //       if (err) return console.log(err)
+    //       res.render('explore.ejs', {
+    //         user : req.user,
+    //         messages: result
+    //       })
+    //     })
+    // });
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
@@ -45,13 +109,13 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
-        if (err) return console.log(err)
-        console.log('saved to database')
-        res.redirect('/stage')
-      })
-    })
+    // app.post('/comments', (req, res) => {
+    //   db.collection('messages').save({msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+    //     if (err) return console.log(err)
+    //     console.log('saved to database')
+    //     res.redirect('/stage')
+    //   })
+    // })
 
     app.put('/messages', (req, res) => {
       db.collection('messages')
@@ -116,7 +180,16 @@ module.exports = function(app, passport, db) {
 
     //create borad
     app.post('/create', (req, res) => {
-      db.collection('messages').save({tag: req.body.tag, bill: req.body.bill, dicuss: req.body.dicuss, background: req.body.background, thumbUp: 0, thumbDown:0}, (err, result) => {
+      db.collection('messages').save({tag: req.body.tag, dicuss: req.body.dicuss, background: req.body.background, thumbUp: 0, thumbDown:0}, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/stage')
+      })
+    })
+
+    // Stage
+    app.post('/comments', (req, res) => {
+      db.collection('comments').save({msg: req.body.msg, side: req.body.side, thumbUp: 0, thumbDown:0}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/stage')
@@ -124,14 +197,14 @@ module.exports = function(app, passport, db) {
     })
 
     app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({tag: req.body.tag, bill: req.body.bill, dicuss: req.body.dicuss, background: req.body.background}, (err, result) => {
+      db.collection('messages').findOneAndDelete({tag: req.body.tag, dicuss: req.body.dicuss, background: req.body.background}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
     })
 
     app.delete('/msgThree', (req, res) => {
-      db.collection('messages').findOneAndDelete({msg: req.body.msg}, (err, result) => {
+      db.collection('comments').findOneAndDelete({msg: req.body.msg, side: req.body.side}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
