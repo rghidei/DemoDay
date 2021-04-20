@@ -7,6 +7,7 @@ var app      = express();
 
 var port     = process.env.PORT || 8080;
 const MongoClient = require('mongodb').MongoClient
+const ObjectID = require('mongodb').ObjectID
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -16,6 +17,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+
+
 var configDB = require('./config/database.js');
 
 var db
@@ -24,7 +27,7 @@ var db
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, ObjectID);
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration

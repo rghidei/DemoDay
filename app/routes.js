@@ -1,10 +1,34 @@
-module.exports = function(app, passport, db) {
-
+module.exports = function(app, passport, db, ObjectID) {
+const {ObjectId} = require('mongodb');
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+      db.collection('messages').find().sort({timestamp: -1}).toArray((err, recResult) => {
+        if (err) return console.log(err)
+        db.collection('messages').find().toArray((err, popResult) => {
+          console.log(popResult[1].thumbUp)
+          console.log(popResult.thumbUp)
+          var postsByLikes = popResult.sort(function (postA, postB) {
+            /** all the code above to sort the posts in the variable named `results` by Likes */
+            const A_COMES_BEFORE_B = -1;
+            const B_COMES_BEFORE_A = 1;
+            console.log(postA.thumbUp, postB.thumbUp)
+
+              if (postA.thumbUp > postB.thumbUp) {
+                return A_COMES_BEFORE_B;
+              } else {
+                return B_COMES_BEFORE_A;
+              }
+          });
+          console.log(postsByLikes)
+          if (err) return console.log(err)
+          res.render('index.ejs', {
+            postsByLikes: postsByLikes,
+            messages: recResult
+          })
+        })
+      })
     });
     //explore
     app.get('/explore', function(req, res) {
@@ -20,33 +44,22 @@ module.exports = function(app, passport, db) {
           comments: result
         })
       })
-      db.collection('comments').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('topic.ejs', {
-          user : req.user,
-          messages: result,
-          comments: result
-        })
-      })
     });
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('messages').find().toArray((err, msgResult) => {
+
           if (err) return console.log(err)
-          res.render('profile.ejs', {
-            user : req.user,
-            messages: result,
-            comments: result
+          db.collection('comments').find().toArray((err, comResult) => {
+            if (err) return console.log(err)
+            res.render('profile.ejs', {
+              user : req.user,
+              comments: comResult,
+              messages: msgResult
+            })
           })
         })
-        db.collection('comments').find().toArray((err, result) => {
-          if (err) return console.log(err)
-          res.render('profile.ejs', {
-            user : req.user,
-            comments: result,
-            messages: result
-          })
-        })
+
     });
     // Create Section
     app.get('/create', isLoggedIn, function(req, res) {
@@ -59,34 +72,31 @@ module.exports = function(app, passport, db) {
         })
     });
     // Stage Section
-    app.get('/stage', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+    app.get('/stage/:msgId', isLoggedIn, function(req, res) {
+        db.collection('messages').findOne({_id: ObjectId(req.params.msgId)},(err, msgResult) => {
+          console.log(req.params.msgId, "msgid")
           if (err) return console.log(err)
-          res.render('stage.ejs', {
-            user : req.user,
-            comments: result,
-            messages: result
+          db.collection('comments').find({msgId: req.params.msgId}).toArray((err, comResult) => {
+            if (err) return console.log(err)
+            res.render('stage.ejs', {
+              user : req.user,
+              comments: comResult,
+              message: msgResult
+            })
           })
         })
-        db.collection('comments').find().toArray((err, result) => {
-          if (err) return console.log(err)
-          res.render('stage.ejs', {
-            user : req.user,
-            comments: result,
-            messages: result
 
-          })
-        })
     });
 
 
     //COMMENTS
-    app.get('/comments', isLoggedIn, function(req, res) {
-        db.collection('comments').find().toArray((err, result) => {
+    app.get('/comments/:msgId', isLoggedIn, function(req, res) {
+        db.collection('comments').find({msgId: req.params.msgId}).toArray((err, comResult) => {
           if (err) return console.log(err)
           res.render('comments.ejs', {
             user : req.user,
-            comments: result
+            comments: comResult,
+            msgId: req.params.msgId
           })
         })
     });
@@ -109,90 +119,50 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    // app.post('/comments', (req, res) => {
-    //   db.collection('messages').save({msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
-    //     if (err) return console.log(err)
-    //     console.log('saved to database')
-    //     res.redirect('/stage')
-    //   })
-    // })
-
-    app.put('/messages', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-
-    app.put('/messagesTwo', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbDown:req.body.thumbDown + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-
-    app.put('/msg', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({ msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-
-    app.put('/msgTwo', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({msg: req.body.msg}, {
-        $set: {
-          thumbDown:req.body.thumbDown + 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-
-
     //create borad
     app.post('/create', (req, res) => {
-      db.collection('messages').save({tag: req.body.tag, dicuss: req.body.dicuss, background: req.body.background, thumbUp: 0, thumbDown:0}, (err, result) => {
+      console.log(req.body._id, "candy")
+      let document =
+      {userName: req.user.local.email,
+      tag: req.body.tag,
+       dicuss: req.body.dicuss,
+       background: req.body.background,
+       thumbUp: 0,
+       timestamp: new Date}
+      db.collection('messages').insertOne(document, (err, result) => {
+        console.log(document)
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/stage')
+        res.redirect('/stage/' + result.ops[0]._id)
       })
     })
 
-    // Stage
+    // Stage board
     app.post('/comments', (req, res) => {
-      db.collection('comments').save({msg: req.body.msg, side: req.body.side, thumbUp: 0, thumbDown:0}, (err, result) => {
+      db.collection('comments').save({msg: req.body.msg, side: req.body.side, msgId: req.body.msgId, thumbUp: 0, timestamp: new Date}, (err, result) => {
+        console.log(result)
         if (err) return console.log(err)
-        console.log('saved to database')
-        res.redirect('/stage')
+        console.log('saved to database', result)
+        res.redirect('/stage/' + result.ops[0].msgId)
+      })
+    })
+
+    app.put('/messages', (req, res) => {
+      // console.log(req.body.postId, ObjectID(req.body.postId), "put")
+      console.log(typeof req.body.postId)
+      console.log(req.body.postId)
+      console.log(req.body.thumbUp)
+      db.collection('messages')
+      .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
+        $set: {
+          thumbUp:req.body.thumbUp + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
       })
     })
 

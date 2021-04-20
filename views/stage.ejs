@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
 
 </head>
 <body class="single is-preload">
@@ -112,23 +112,18 @@
 
                   <div class="page-header text-center">
                     <h3>Discussion</h3>
-                    <ul class="messages">
-                    <% for(var i=0; i<messages.length; i++) {%>
-                      <li class="message">
-                        <span><%= user.local.email %></span>
-                        <span><%= messages[i].tag %></span>
-                        <span><%= messages[i].dicuss %></span>
-                        <span><%= messages[i].background %></span>
-                        <span class="hide"><%= messages[i].thumbUp %></span>
-                        <span class="hide"><%= messages[i].thumbDown%></span>
-                        <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
+                    <div id="postBox">
+                        <span><strong>Username: </strong><%= user.local.email %></span>
+                        <span class="tag"><strong>Topic: </strong><%= message.tag %></span>
+                        <span class="dicuss"><strong>Statment: </strong><%= message.dicuss %></span>
+                        <span class="info"><strong>Background: </strong><%= message.background %></span>
+                        <span class="time name"><strong>Time: </strong>Time: <%= message.timestamp %></span>
+                        <span class="thumb"><strong>Likes: </strong><%= message.thumbUp %></span>
+                        <span class="hide postId"><%= message.postId%></span>
                         <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                      </li>
-                    <% } %>
-                    </ul>
-                    <a href="/comments" class="btn btn-default btn-sm">Add A Comment</a>
 
+                    <a href="/comments/<%=message._id %>" class="btn btn-default btn-sm">Add A Comment</a>
+                  </div>
                   </div>
 
                   <!-- LIST OF COMMENTS pROS AND CONS  -->
@@ -141,10 +136,7 @@
                         <span><%= comments[i].msg %></span>
                         <span class="hide"><%= comments[i].side %></span>
                         <span class="hide"><%= comments[i].thumbUp %></span>
-                        <span class="hide"><%= comments[i].thumbDown%></span>
-                        <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
                         <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
                       </li>
                     <% }} %>
                     </ul>
@@ -157,11 +149,8 @@
                       <li class="comments">
                         <span><%= comments[i].msg %></span>
                         <span class="hide"><%= comments[i].side %></span>
-                        <span class="hide"><%= comments[i].thumbUp %></span>
-                        <span class="hide"><%= comments[i].thumbDown%></span>
-                        <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
+                        <span class="thumb"><%= comments[i].thumbUp %></span>
                         <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                        <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
                       </li>
                     <% }} %>
                     </ul>
@@ -193,12 +182,12 @@
     </div>
 
   <!-- Scripts -->
-  	<script src="main.js"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+  	<script src="/main.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 </html>

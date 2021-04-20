@@ -92,33 +92,42 @@
               <!-- This line is interchangeable -->
               <h2><strong>Topic:</strong> List of Posts</h2>
   						<!-- Post -->
-  							<article class="post">
+
+                  <ul>
+                  <% for(var i=0; i<messages.length; i++) {%>
+                  <li>
+                  <article class="post">
                   <header>
   									<div class="title">
-  										<h2><a href="#"><strong>Title:</strong></a></h2>
+  										<h2><a href="#"><strong>Title:</strong></a><%= messages[i].dicuss %></h2>
   									</div>
   									<div class="meta">
-  										<time class="published" datetime="2015-11-01"><strong>Time:</strong></time>
-  										<a href="#" class="author"><span class="name"><strong>Name: </strong></span><img src="images/avatar.jpg" alt="" /></a>
+                      <span class="published">Time: <strong><%= messages[i].timestamp %></strong></span>
+  										<!-- <time class="published" datetime="<%= messages[i].timestamp %>"><strong>Time:</strong></time> -->
+  										<a href="#" class="author"><span class="name"><strong>Name: </strong><%= user.local.email %></span><img src="images/avatar.jpg" alt="" /></a>
   									</div>
   								</header>
   								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-  								<p><strong>Background: </strong></p>
+  								<p><strong>Background: </strong><%= messages[i].background %></p>
   								<footer>
   									<ul class="actions">
   										<li><a href="/topic" class="button large">Enter</a></li>
   									</ul>
   									<ul class="stats">
-  										<li><a href="#"><strong>Topic Tag: </strong></a></li>
-  										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong></a></li>
+  										<li><a href="#"><strong>Topic Tag: </strong></a><%= messages[i].tag %></li>
+  										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong></a><%= messages[i].thumbUp %></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
                       <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li>
   									</ul>
   								</footer>
-  							</article>
+                  </article>
+                  </li>
+                  <% } %>
+                  </ul>
+
   					</div>
   			</div>
-    
+
 </div>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/browser.min.js"></script>

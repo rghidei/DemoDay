@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+
 </head>
 <body class="single is-preload">
 
@@ -134,22 +136,26 @@
                       </div>
                       <div class="col-sm-6">
                         <h3>Activity</h3>
+                        <h2>Created Discussions</h2>
                         <ul class="messages">
-                          <h2>Created Discussions</h2>
                         <% for(var i=0; i<messages.length; i++) {%>
-                          <li class="message">
-                            <span><%= user.local.email %></span>
-                            <span><%= messages[i].tag %></span>
-                            <span><%= messages[i].dicuss %></span>
-                            <span><%= messages[i].background %></span>
-                            <span><%= messages[i].msg %></span>
-                            <span class="hide"><%= messages[i].thumbUp %></span>
-                            <span class="hide"><%= messages[i].thumbDown%></span>
-                            <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
+                          <li id="<%= messages[i]._id%>" class="message">
+                            <div id="postBox">
+                            <a class="id" href="/stage/<%=messages[i]._id %>">
+                            <span class="user"><strong>Username:</strong><%= messages[i].userName %></span>
+                            <span class="tag"><strong>Tag:</strong><%= messages[i].tag %></span>
+                            <span class="dicuss"><strong>Statment:</strong><%= messages[i].dicuss %></span>
+                            <span class="info"><strong>Background:</strong><%= messages[i].background %></span>
+                            </a>
+                            <span class="time name"><strong>Time:</strong> <%= messages[i].timestamp %></span>
+                            <span class="thumb"><%= messages[i].thumbUp %></span>
+                            <span class="postId"><strong>ID:</strong><span><%= messages[i]._id %></span></span>
+
                             <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
                             <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                          </div>
                           </li>
+
                         <% } %>
                         </ul>
                         <ul class="comments">
@@ -159,10 +165,7 @@
                             <span><%= comments[i].msg %></span>
                             <span class="hide"><%= comments[i].side %></span>
                             <span class="hide"><%= comments[i].thumbUp %></span>
-                            <span class="hide"><%= comments[i].thumbDown%></span>
-                            <span><%= (comments[i].thumbUp - comments[i].thumbDown)%></span>
                             <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
                           </li>
                         <% } %>
                         </ul>
@@ -234,12 +237,12 @@
     </div>
 
   <!-- Scripts -->
-  	<script src="main.js"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+  	<script src="/main.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 </html>
