@@ -1,5 +1,6 @@
-var thumbUp = document.getElementsByClassName("fa-thumbs-up");
+var thumbUp = document.getElementsByClassName("profileT");
 var trash = document.getElementsByClassName("fa-trash");
+// var stageThumbUp = document.getElementsByClassName("stageT");
 // var thumbDown = document.getElementsByClassName("fa-thumbs-down");
 
 
@@ -11,6 +12,7 @@ Array.from(thumbUp).forEach(function(element) {
         const background = this.parentNode.parentNode.querySelector('.info').innerText
         const postId = this.parentNode.parentNode.querySelector('.postId span').innerText
         const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumb').innerText)
+        console.log(tag, dicuss, background, postId, thumbUp)
         fetch('messages', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
@@ -32,6 +34,40 @@ Array.from(thumbUp).forEach(function(element) {
         })
       });
 });
+
+
+      // document.querySelector('.stageT').addEventListener('click', addLike)
+      //
+      //
+      // function addLike(){
+      // console.log('panda2')
+      //   const tag = this.parentNode.parentNode.querySelector('.tagStage').innerText
+      //   const dicuss = this.parentNode.parentNode.querySelector('.dicussStage').innerText
+      //   const background = this.parentNode.parentNode.querySelector('.infoStage').innerText
+      //   const postId = this.parentNode.parentNode.querySelector('.postIdStage span').innerText
+      //   const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbStage').innerText)
+      //   console.log(tag, dicuss, background, postId, thumbUp)
+      //   fetch('bob', {
+      //     method: 'put',
+      //     headers: {'Content-Type': 'application/json'},
+      //     body: JSON.stringify({
+      //       'tag': tag,
+      //       'dicuss': dicuss,
+      //       'background': background,
+      //       'timestamp': new Date,
+      //       'postId': postId,
+      //       'thumbUp': thumbUp
+      //     })
+      //   })
+      //   .then(response => {
+      //     if (response.ok) return response.json()
+      //   })
+      //   .then(data => {
+      //     console.log(data)
+      //     window.location.reload(true)
+      //   })
+      // };
+
 
 Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
@@ -124,3 +160,8 @@ Array.from(trash).forEach(function(element) {
 //         })
 //       });
 // });
+document.querySelector('.followerBtn').addEventListener('click', addPost)
+
+function addPost(){
+
+}

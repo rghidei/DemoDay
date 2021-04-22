@@ -7,13 +7,12 @@ const {ObjectId} = require('mongodb');
       db.collection('messages').find().sort({timestamp: -1}).toArray((err, recResult) => {
         if (err) return console.log(err)
         db.collection('messages').find().toArray((err, popResult) => {
-          console.log(popResult[1].thumbUp)
-          console.log(popResult.thumbUp)
+
           var postsByLikes = popResult.sort(function (postA, postB) {
             /** all the code above to sort the posts in the variable named `results` by Likes */
             const A_COMES_BEFORE_B = -1;
             const B_COMES_BEFORE_A = 1;
-            console.log(postA.thumbUp, postB.thumbUp)
+            // console.log(postA.thumbUp, postB.thumbUp)
 
               if (postA.thumbUp > postB.thumbUp) {
                 return A_COMES_BEFORE_B;
@@ -21,9 +20,10 @@ const {ObjectId} = require('mongodb');
                 return B_COMES_BEFORE_A;
               }
           });
-          console.log(postsByLikes)
+          // console.log(postsByLikes)
           if (err) return console.log(err)
           res.render('index.ejs', {
+            user : req.user,
             postsByLikes: postsByLikes,
             messages: recResult
           })
@@ -35,20 +35,21 @@ const {ObjectId} = require('mongodb');
         res.render('explore.ejs');
     });
     //Topic
-    app.get('/topic', function(req, res) {
-      db.collection('messages').find().toArray((err, result) => {
+    app.get('/topic/:topic', isLoggedIn, function(req, res) {
+      let topicTag = req.params.topic
+      console.log(req.params.topic, topicTag, "kuawii")
+    db.collection('messages').find({tag: topicTag}).toArray((err, result) => {
+      console.log(result, "dua")
         if (err) return console.log(err)
         res.render('topic.ejs', {
           user : req.user,
-          messages: result,
-          comments: result
+          messages: result
         })
       })
     });
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
         db.collection('messages').find().toArray((err, msgResult) => {
-
           if (err) return console.log(err)
           db.collection('comments').find().toArray((err, comResult) => {
             if (err) return console.log(err)
@@ -74,13 +75,26 @@ const {ObjectId} = require('mongodb');
     // Stage Section
     app.get('/stage/:msgId', isLoggedIn, function(req, res) {
         db.collection('messages').findOne({_id: ObjectId(req.params.msgId)},(err, msgResult) => {
-          console.log(req.params.msgId, "msgid")
+          // console.log(req.params.msgId, "stagemsgid")
           if (err) return console.log(err)
           db.collection('comments').find({msgId: req.params.msgId}).toArray((err, comResult) => {
+            var comsByLikes = comResult.sort(function (comA, comB) {
+              /** all the code above to sort the posts in the variable named `results` by Likes */
+              const A_COMES_BEFORE_B = -1;
+              const B_COMES_BEFORE_A = 1;
+              // console.log(comA.thumbUp, comB.thumbUp)
+
+                if (comA.thumbUp > comB.thumbUp) {
+                  return A_COMES_BEFORE_B;
+                } else {
+                  return B_COMES_BEFORE_A;
+                }
+            });
+            // console.log(comsByLikes)
             if (err) return console.log(err)
             res.render('stage.ejs', {
               user : req.user,
-              comments: comResult,
+              comsByLikes: comsByLikes,
               message: msgResult
             })
           })
@@ -99,6 +113,18 @@ const {ObjectId} = require('mongodb');
             msgId: req.params.msgId
           })
         })
+    });
+    // Followers
+    app.get('/follow/:userId', isLoggedIn, function(req, res) {
+      let userId  = ObjectId(req.params.userId)
+      db.collection('messages').find({followers: userId}).toArray((err, result) => {
+        console.log(result, "fish")
+        if (err) return console.log(err)
+        res.render('follow.ejs', {
+          user : req.user,
+          messages: result
+        })
+      })
     });
 
     //Explore
@@ -123,14 +149,16 @@ const {ObjectId} = require('mongodb');
     app.post('/create', (req, res) => {
       console.log(req.body._id, "candy")
       let document =
-      {userName: req.user.local.email,
+      {userName: req.user.local.username,
       tag: req.body.tag,
        dicuss: req.body.dicuss,
        background: req.body.background,
        thumbUp: 0,
-       timestamp: new Date}
+       timestamp: new Date,
+       followers: []
+     }
       db.collection('messages').insertOne(document, (err, result) => {
-        console.log(document)
+        // console.log(document)
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/stage/' + result.ops[0]._id)
@@ -140,7 +168,7 @@ const {ObjectId} = require('mongodb');
     // Stage board
     app.post('/comments', (req, res) => {
       db.collection('comments').save({msg: req.body.msg, side: req.body.side, msgId: req.body.msgId, thumbUp: 0, timestamp: new Date}, (err, result) => {
-        console.log(result)
+        // console.log(result)
         if (err) return console.log(err)
         console.log('saved to database', result)
         res.redirect('/stage/' + result.ops[0].msgId)
@@ -149,13 +177,67 @@ const {ObjectId} = require('mongodb');
 
     app.put('/messages', (req, res) => {
       // console.log(req.body.postId, ObjectID(req.body.postId), "put")
-      console.log(typeof req.body.postId)
-      console.log(req.body.postId)
-      console.log(req.body.thumbUp)
+      // console.log(typeof req.body.postId)
+      // console.log(req.body.postId)
+      // console.log(req.body.thumbUp)
       db.collection('messages')
       .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
         $set: {
           thumbUp:req.body.thumbUp + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+
+    app.put('/stage/bob', (req, res) => {
+      // console.log('hi')
+      // console.log(req.body.postId, ObjectID(req.body.postId), "put")
+      // console.log(typeof req.body.postId)
+      // console.log(req.body.postId)
+      // console.log(req.body.thumbUp)
+      db.collection('messages')
+      .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
+        $set: {
+          thumbUp:req.body.thumbUp + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+
+    app.put('/stage/greg', (req, res) => {
+      // console.log('willow')
+      // console.log(typeof req.body.comId)
+      // console.log(req.body.comId)
+      // console.log(req.body.thumbUp)
+      db.collection('comments')
+      .findOneAndUpdate({_id: ObjectID(req.body.comId)}, {
+        $set: {
+          thumbUp:req.body.thumbUp + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+
+    app.put('/follow/:userId', isLoggedIn, (req, res) => {  
+      db.collection('messages')
+      .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
+        $set: {
+          followers: followers.push(userId)
         }
       }, {
         sort: {_id: -1},
@@ -237,5 +319,5 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    res.redirect('/');
+    res.redirect('/login');
 }

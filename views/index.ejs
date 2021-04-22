@@ -23,8 +23,8 @@
   							<ul>
                   <li><a href="/">Home</a></li>
   								<li><a href="/explore">Explore</a></li>
-  								<li><a href="/login">Create</a></li>
-
+  								<li><a href="/create">Create</a></li>
+                  <li><a href="/profile">Profile</a></li>
   							</ul>
   						</nav>
   						<nav class="main">
@@ -110,13 +110,15 @@
   								<p><strong>Background: </strong><%= postsByLikes[i].background %></p>
   								<footer>
   									<ul class="actions">
-  										<li><a href="/topic" class="button large">Enter</a></li>
+  										<li><a href="/stage/<%=postsByLikes[i]._id %>" class="button large">Enter</a></li>
   									</ul>
   									<ul class="stats">
   										<li><a href="#"><strong>Topic Tag: </strong><%= postsByLikes[i].tag %></a></li>
   										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong><%= postsByLikes[i].thumbUp %></a></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
-                      <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li>
+                      <li>
+                        <a href="/login"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button>
+                      </li>
   									</ul>
   								</footer>
   							</article>
@@ -162,7 +164,7 @@
                           </li>
                         <% } %>
                       </ol>
-  											
+
   										</article>
 
   									<!--2  Mini Post -->

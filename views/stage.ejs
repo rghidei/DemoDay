@@ -113,15 +113,14 @@
                   <div class="page-header text-center">
                     <h3>Discussion</h3>
                     <div id="postBox">
-                        <span><strong>Username: </strong><%= user.local.email %></span>
-                        <span class="tag"><strong>Topic: </strong><%= message.tag %></span>
-                        <span class="dicuss"><strong>Statment: </strong><%= message.dicuss %></span>
-                        <span class="info"><strong>Background: </strong><%= message.background %></span>
-                        <span class="time name"><strong>Time: </strong>Time: <%= message.timestamp %></span>
-                        <span class="thumb"><strong>Likes: </strong><%= message.thumbUp %></span>
-                        <span class="hide postId"><%= message.postId%></span>
-                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-
+                      <span class="userStage"><strong>Username:</strong><%= message.userName %></span>
+                      <span class="tagStage"><strong>Tag:</strong><%= message.tag %></span>
+                      <span class="dicussStage"><strong>Statment:</strong><%= message.dicuss %></span>
+                      <span class="infoStage"><strong>Background:</strong><%= message.background %></span>
+                      <span class="time name"><strong>Time:</strong><%= message.timestamp %></span>
+                      <span class="postIdStage"><strong>ID:</strong><span><%= message._id %></span></span>
+                      <span class="thumbStage"><%= message.thumbUp %></span>
+                      <span><i class="fa fa-thumbs-up stageT" aria-hidden="true"></i></span>
                     <a href="/comments/<%=message._id %>" class="btn btn-default btn-sm">Add A Comment</a>
                   </div>
                   </div>
@@ -130,13 +129,15 @@
                   <div class="pro">
                     Pro Comments
                     <ul class="comments">
-                    <% for(var i=0; i<comments.length; i++) {%>
-                    <% if(comments[i].side === "Pro") { %>
+                    <% for(var i=0; i<comsByLikes.length; i++) {%>
+                    <% if(comsByLikes[i].side === "Pro") { %>
                       <li class="comments">
-                        <span><%= comments[i].msg %></span>
-                        <span class="hide"><%= comments[i].side %></span>
-                        <span class="hide"><%= comments[i].thumbUp %></span>
-                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span class="msg"><%= comsByLikes[i].msg %></span>
+                        <span class="hide side"><%= comsByLikes[i].side %></span>
+                        <span class="comId"><strong>ID:</strong><span><%= comsByLikes[i]._id %></span></span>
+                        <span class="time name"><strong>Time:</strong><%= comsByLikes[i].timestamp %></span>
+                        <span class="thumbCom"><%= comsByLikes[i].thumbUp %></span>
+                        <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
                       </li>
                     <% }} %>
                     </ul>
@@ -144,13 +145,14 @@
                   <div class="con">
                     Con Comments
                     <ul class="comments">
-                    <% for(var i=0; i<comments.length; i++) {%>
-                    <% if(comments[i].side === "Con") { %>
+                    <% for(var i=0; i<comsByLikes.length; i++) {%>
+                    <% if(comsByLikes[i].side === "Con") { %>
                       <li class="comments">
-                        <span><%= comments[i].msg %></span>
-                        <span class="hide"><%= comments[i].side %></span>
-                        <span class="thumb"><%= comments[i].thumbUp %></span>
-                        <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                        <span class="msg"><%= comsByLikes[i].msg %></span>
+                        <span class="hide side"><%= comsByLikes[i].side %></span>
+                        <span class="comId"><strong>ID:</strong><span><%= comsByLikes[i]._id %></span></span>
+                        <span class="thumbCom"><%= comsByLikes[i].thumbUp %></span>
+                        <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
                       </li>
                     <% }} %>
                     </ul>
@@ -182,7 +184,7 @@
     </div>
 
   <!-- Scripts -->
-  	<script src="/main.js"></script>
+  	<script src="/stageMain.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/browser.min.js"></script>
     <script src="/assets/js/breakpoints.min.js"></script>

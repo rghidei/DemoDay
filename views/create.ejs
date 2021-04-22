@@ -17,9 +17,9 @@
             <h1><a href="index.html">Debate</a></h1>
             <nav class="links">
               <ul>
-                <li><a href="index.ejs">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/explore">Explore</a></li>
-                <li><a href="create.ejs" type="submit" >Create</a></li>
+                <li><a href="/create" type="submit" >Create</a></li>
                 <li><a href="/profile">Profile</a></li>
                 <!-- <li><a href="#">Tempus</a></li>
                 <li><a href="#">Adipiscing</a></li> -->
@@ -138,7 +138,17 @@
                           <h2>Enter discussion details</h2>
 
                           <form action="/create" method="POST">
-                            <input class="form-control" type="text" placeholder="Tag"value="" name="tag">
+                            <select class="tag" name="tag">
+                              <option  value="History">History</option>
+                              <option value="Geography">Geography</option>
+                              <option  value="Film">Film</option>
+                              <option value="Music">Music</option>
+                              <option  value="Sports">Sports</option>
+                              <option value="Science">Science</option>
+                              <option  value="Politics">Politics</option>
+                              <option value="Ethics">Ethics</option>
+                              <option  value="Global">Global</option>
+                            </select>
                             <input class="form-control" placeholder="Provide a bried title describing your thesis" type="text" name="dicuss" value="">
                             <input class="form-control" placeholder="Add information revelant to your discussion" type="text" name="background" value="">
                             <button type="submit">Submit</button>

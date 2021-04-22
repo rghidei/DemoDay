@@ -4,11 +4,7 @@
     <title>Home</title>
     <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css"/>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+		<link rel="stylesheet" href="assets/css/main.css" />
 
 
 </head>
@@ -21,7 +17,7 @@
 
   				<!-- Header -->
   					<header id="header">
-  						<h1><a href="/">Debate</a></h1>
+  						<h1><a href="index.html">Debate</a></h1>
   						<nav class="links">
   							<ul>
                   <li><a href="/">Home</a></li>
@@ -64,13 +60,14 @@
   										</a>
   									</li>
   									<li>
-  										<a href="/explore">
+  										<a href="#">
   											<h3>Explore</h3>
                       </a>
   									</li>
   									<li>
   										<a href="/login">
   											<h3>Create</h3>
+  											<p>Phasellus sed ultricies mi congue</p>
   										</a>
   									</li>
   									<li>
@@ -93,7 +90,7 @@
   				<!-- Main this is where i want the most popular post to show up -->
   					<div class="popularPosts" id="main">
               <!-- This line is interchangeable -->
-              <h2><strong>Topic:</strong> List of Posts</h2>
+              <h2><strong>Following:</strong> List of Posts</h2>
   						<!-- Post -->
 
                   <ul>
@@ -113,21 +110,14 @@
   								<p><strong>Background:</strong><%= messages[i].background %></p>
   								<footer>
   									<ul class="actions">
-  										<li><a href="/stage/<%=messages[i]._id %>" class="button large">Enter</a></li>
+  										<li><a href="/topic" class="button large">Enter</a></li>
   									</ul>
   									<ul class="stats">
   										<li><a href="#"><strong>Topic Tag: </strong></a><%= messages[i].tag %></li>
   										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong></a><%= messages[i].thumbUp %></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
                       <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li>
-                      <li>
-                      <form class="" action="/follow" method="put">
-                      <a href="/login"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button></a>
-                      </form>
-                      </li>
   									</ul>
-
-
   								</footer>
                   </article>
                   </li>
@@ -138,11 +128,11 @@
   			</div>
 
 </div>
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/browser.min.js"></script>
-<script src="/assets/js/breakpoints.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<script src="/assets/js/main.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>
 </html>
