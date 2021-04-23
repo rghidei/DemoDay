@@ -2,10 +2,11 @@
   "name": "authentication",
   "main": "server.js",
   "dependencies": {
-    "bcrypt-nodejs": "latest",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "connect-flash": "~0.1.1",
     "cookie-parser": "~1.4.3",
+    "dotenv": "^8.2.0",
     "ejs": "~2.5.2",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
