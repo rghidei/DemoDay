@@ -117,7 +117,8 @@ const {ObjectId} = require('mongodb');
     // Followers
     app.get('/follow/:userId', isLoggedIn, function(req, res) {
       let userId  = ObjectId(req.params.userId)
-      db.collection('messages').find({followers: userId}).toArray((err, result) => {
+      console.log('butterfly', userId)
+      db.collection('messages').find({followers: ObjectId(req.params.userId)}).toArray((err, result) => {
         console.log(result, "fish")
         if (err) return console.log(err)
         res.render('follow.ejs', {
@@ -127,16 +128,7 @@ const {ObjectId} = require('mongodb');
       })
     });
 
-    //Explore
-    // app.get('/explore', isLoggedIn, function(req, res) {
-    //     db.collection('messages').find().toArray((err, result) => {
-    //       if (err) return console.log(err)
-    //       res.render('explore.ejs', {
-    //         user : req.user,
-    //         messages: result
-    //       })
-    //     })
-    // });
+
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
@@ -195,11 +187,6 @@ const {ObjectId} = require('mongodb');
     })
 
     app.put('/stage/bob', (req, res) => {
-      // console.log('hi')
-      // console.log(req.body.postId, ObjectID(req.body.postId), "put")
-      // console.log(typeof req.body.postId)
-      // console.log(req.body.postId)
-      // console.log(req.body.thumbUp)
       db.collection('messages')
       .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
         $set: {
@@ -215,10 +202,6 @@ const {ObjectId} = require('mongodb');
     })
 
     app.put('/stage/greg', (req, res) => {
-      // console.log('willow')
-      // console.log(typeof req.body.comId)
-      // console.log(req.body.comId)
-      // console.log(req.body.thumbUp)
       db.collection('comments')
       .findOneAndUpdate({_id: ObjectID(req.body.comId)}, {
         $set: {
@@ -233,18 +216,24 @@ const {ObjectId} = require('mongodb');
       })
     })
 
-    app.put('/follow/:userId', isLoggedIn, (req, res) => {  
+    app.put('/follow/add', (req, res) => {
+      let userId = req.user._id
+      let user  = ObjectId(userId)
+      console.log('yellow')
+      console.log(req.body.postId, user)
       db.collection('messages')
       .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
-        $set: {
-          followers: followers.push(userId)
+        $addToSet: {
+          followers: user
         }
       }, {
         sort: {_id: -1},
         upsert: true
       }, (err, result) => {
+        console.log(`this is my ${result}: userId = ${userId}`)
         if (err) return res.send(err)
         res.send(result)
+        // res.redirect(303, '/follow/' + userId)
       })
     })
 

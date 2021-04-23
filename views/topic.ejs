@@ -27,6 +27,8 @@
                   <li><a href="/">Home</a></li>
   								<li><a href="/explore">Explore</a></li>
   								<li><a href="/login">Create</a></li>
+                  <li><a href="/profile">Profile</a></li>
+
 
   							</ul>
   						</nav>
@@ -106,14 +108,14 @@
   									</div>
   									<div class="meta">
                       <span class="published">Time:<strong><%= messages[i].timestamp %></strong></span>
-  										<a href="#" class="author"><span class="name"><strong>Name:</strong><%= messages.userName %></span><img src="images/avatar.jpg" alt="" /></a>
+  										<span class="author" id="postid"><%= messages[i]._id %></span>
   									</div>
   								</header>
   								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
   								<p><strong>Background:</strong><%= messages[i].background %></p>
   								<footer>
   									<ul class="actions">
-  										<li><a href="/stage/<%=messages[i]._id %>" class="button large">Enter</a></li>
+  										<li><a href="/stage/<%=messages[i]._id %>"  class="button large">Enter</a></li>
   									</ul>
   									<ul class="stats">
   										<li><a href="#"><strong>Topic Tag: </strong></a><%= messages[i].tag %></li>
@@ -121,13 +123,11 @@
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
                       <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li>
                       <li>
-                      <form class="" action="/follow" method="put">
-                      <a href="/login"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button></a>
+                      <form class="" action="javascript:void(0)" method="put">
+                      <button data-userId="<%= user._id %>" class="followBtn" type="submit"><strong>Follow Debate</strong></button>
                       </form>
                       </li>
   									</ul>
-
-
   								</footer>
                   </article>
                   </li>
@@ -138,6 +138,7 @@
   			</div>
 
 </div>
+<script src="/main.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/browser.min.js"></script>
 <script src="/assets/js/breakpoints.min.js"></script>
