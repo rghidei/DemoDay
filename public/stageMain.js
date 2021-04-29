@@ -7,7 +7,7 @@ document.querySelector('.stageT').addEventListener('click', addLike)
 function addLike(){
 console.log('panda2')
   const tag = this.parentNode.parentNode.querySelector('.tagStage').innerText
-  const dicuss = this.parentNode.parentNode.querySelector('.dicussStage').innerText
+  const dicuss = this.parentNode.parentNode.querySelector('#discussion').innerText
   const background = this.parentNode.parentNode.querySelector('.infoStage').innerText
   const postId = this.parentNode.parentNode.querySelector('.postIdStage span').innerText
   const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbStage').innerText)

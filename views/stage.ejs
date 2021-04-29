@@ -107,17 +107,15 @@
                   <div id="pageHeader" class="page-header text-center">
                     <h3 id="hthree">Discussion</h3>
                     <div id="postBox">
-                      <span class="dicussStage"><strong>Statment: </strong><%= message.dicuss %></span>
+                      <span id="discussion"><strong>Statment: </strong><%= message.dicuss %></span>
                       <span class="infoStage"><strong>Background: </strong><%= message.background %></span>
-                    <div class="foot">
-                      <span class="postIdStage hid"><strong>ID </strong><span><%= message._id %></span></span>
+                      <span class="postIdStage hid"><span><%= message._id %></span></span>
                       <span class="userStage"><strong>Username: </strong><%= message.userName %></span>
                       <span class="tagStage"><strong>Topic Tag: </strong><%= message.tag %></span>
                       <span class="time name"><strong>Posted: </strong><%= helpers.getDate(message.timestamp) %></span>
-                      <span class="thumbsUpCom"><i class="fa fa-thumbs-up stageT" aria-hidden="true"></i></span>
-                      <span class="thumbStage"><strong># of Likes: </strong> <%= message.thumbUp %></span>
+                      <span id="span1"><i class="fa fa-thumbs-up stageT" aria-hidden="true"></i></span>
+                      <span id="span1"class="thumbStage"><%= message.thumbUp %></span>
                       <a href="/comments/<%=message._id %>" class="btn btn-default btn-sm">Add A Comment</a>
-                    </div>
                   </div>
                   </div>
 
@@ -125,7 +123,7 @@
                   <div class="jerry">
 
                   <div class="pro">
-                    <h2 id="htwo">Pro</h2>
+                    <h2 id="htwo">For</h2>
                     <ul class="comments hideList">
                     <% for(var i=0; i<comsByLikes.length; i++) {%>
                     <% if(comsByLikes[i].side === "Pro") { %>
@@ -149,7 +147,7 @@
                     </ul>
                   </div>
                   <div class="con">
-                    <h2 id="htwo">Con</h2>
+                    <h2 id="htwo">Against</h2>
                     <ul class="comments hideList">
                     <% for(var i=0; i<comsByLikes.length; i++) {%>
                     <% if(comsByLikes[i].side === "Con") { %>
@@ -186,7 +184,7 @@
         </div>
 
       <!-- Footer -->
-        
+
 
     </div>
 

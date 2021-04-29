@@ -88,6 +88,9 @@ span{
 .dicussStage{
   font-size: 1.5rem;
 }
+#span1{
+  display: inline-block;
+}
 
 /* Index */
 
