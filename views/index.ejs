@@ -6,6 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
 
 
 </head>
@@ -24,7 +26,6 @@
                   <li><a href="/">Home</a></li>
   								<li><a href="/explore">Explore</a></li>
   								<li><a href="/create">Create</a></li>
-                  <li><a href="/profile">Profile</a></li>
   							</ul>
   						</nav>
   						<nav class="main">
@@ -66,9 +67,14 @@
                       </a>
   									</li>
   									<li>
-  										<a href="/login">
+  										<a href="/create">
   											<h3>Create</h3>
   											<p>Phasellus sed ultricies mi congue</p>
+  										</a>
+  									</li>
+                    <li>
+  										<a href="/profile">
+  											<h3>Profile</h3>
   										</a>
   									</li>
   									<li>
@@ -93,8 +99,9 @@
   					<div class="popularPosts" id="main">
               <h2>Popular Posts</h2>
   						<!-- Post -->
-              <ul>
+
                 <% for(var i=0; i<postsByLikes.length; i++) {%>
+                <ul class="hideList">
                 <li>
   							<article class="post">
   								<header>
@@ -102,11 +109,11 @@
   										<h2><a href="#"><strong>Title:</strong></a><%= postsByLikes[i].dicuss %></h2>
   									</div>
   									<div class="meta">
-  										<time class="published" datetime=""><strong>Time:</strong><%=  postsByLikes[i].timestamp %></time>
-  										<a href="#" class="author"><span class="name"><strong>Name: </strong><%= postsByLikes[i].userName %></span><img src="images/avatar.jpg" alt="" /></a>
+  										<time class="published" datetime=""><strong>Time:</strong><%=  helpers.getDate(postsByLikes[i].timestamp) %></time>
+  										<a href="#" class="author"><span class="name"><strong>Name: </strong><%= postsByLikes[i].userName %></span></a>
   									</div>
   								</header>
-  								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+  								<a href="#" class="image featured"><img src="<%= postsByLikes[i].img %>" alt="pic" /></a>
   								<p><strong>Background: </strong><%= postsByLikes[i].background %></p>
   								<footer>
   									<ul class="actions">
@@ -117,14 +124,14 @@
   										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong><%= postsByLikes[i].thumbUp %></a></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
                       <li>
-                        <a href="/login"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button>
+                        <a href="/follow/<%= user._id %>"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button>
                       </li>
   									</ul>
   								</footer>
   							</article>
               </li>
-              <% } %>
-            </ul>
+              </ul>
+            <% } %>
   					</div>
 
   				<!-- Sidebar -->
@@ -145,7 +152,7 @@
   								<div class="mini-posts">
 
   									<!-- 1 Mini Post -->
-  										<article class="mini-post">
+  										<!-- <article class="mini-post">
                         <ol class="messages">
                         <% for(var i=0; i<messages.length && i < 5; i++) {%>
                           <li class="message">
@@ -163,79 +170,52 @@
                           </div>
                           </li>
                         <% } %>
-                      </ol>
+                      </ol> -->
 
-  										</article>
+  										<!-- </article> -->
 
   									<!--2  Mini Post -->
-  										<article class="mini-post">
-                        <header>
-                          <h3><a href="#"><strong>Title:</strong></a></h3>
-                          <time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-                          <a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
-                        </header>
-                        <a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-  										</article>
+
 
   									<!-- 3 Mini Post -->
+                  <% for(var i=0; i<messages.length && i < 5; i++) {%>
+                  <ol class="hideList">
+                    <li>
   										<article class="mini-post">
                         <header>
-                          <h3><a href="#"><strong>Title:</strong></a></h3>
-                          <time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-                          <a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+                          <h3><a href="#"><strong>Title:</strong><%= messages[i].dicuss %></a></h3>
+                          <time class="published" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
+                          <h2><a href="#" class="author"><strong>Author:</strong><%= messages[i].userName %></a></h2>
                         </header>
-                        <a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
+                        <a href="#" class="image"><strong>Img:</strong><img src="<%= messages[i].img %>" alt="" /></a>
   										</article>
-
+                    </li>
+                  </ol>
+                  <% } %>
   									<!-- 4 Mini Post -->
-  										<article class="mini-post">
-                        <header>
-  												<h3><a href="#"><strong>Title:</strong></a></h3>
-  												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-  												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
-  											</header>
-  											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-  										</article>
 
-  								</div>
-  							</section>
 
   						<!-- Posts List -->
               <!-- LIST OF TOP USERS -->
   							<section class="top5">
                   <h2>Top 5 Users</h2>
-  								<ol class="posts">
+  								<ul class="posts">
   									<li>
   											<header>
-  												<h3><strong>Title: </strong><a href="#"></a></h3>
-  												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+  												<h3><strong>Number of Posts:</strong><%= postsByLikes.length %></h3>
   											</header>
   									</li>
   									<li>
                         <header>
-                          <h3><strong>Title: </strong><a href="#"></a></h3>
-                          <time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+                          <h3><strong>Number of Comments: </strong></h3>
                         </header>
   									</li>
   									<li>
                         <header>
-  												<h3><strong>Title: </strong><a href="#"></a></h3>
-  												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+  												<h3><strong>Number of Users: </strong></h3>
   											</header>
   									</li>
-  									<li>
-                        <header>
-  												<h3><strong>Title: </strong><a href="#"></a></h3>
-  												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-  											</header>
-  									</li>
-  									<li>
-                        <header>
-  												<h3><strong>Title: </strong><a href="#"></a></h3>
-  												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-  											</header>
-  									</li>
-  								</ol>
+  								</ul>
   							</section>
 
   						<!-- About -->
@@ -265,11 +245,14 @@
     </div>
 
 </div>
+<script src="/follow.js"></script>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/browser.min.js"></script>
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="/follow.js"></script>
+
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+//stage ejs
 var commenThumbUp = document.getElementsByClassName("commentThumb");
 
 document.querySelector('.stageT').addEventListener('click', addLike)
@@ -60,3 +61,7 @@ Array.from(commenThumbUp).forEach(function(element) {
         })
       });
 });
+
+function getdate(dateTime){
+   return dateTime.toISOString().slice(0, 19).replace("T", " ");
+}

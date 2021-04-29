@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+
+</head>
+<body class="single is-preload">
+
+  <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Header -->
+        <header id="header">
+          <h1><a href="index.html">Debate</a></h1>
+          <nav class="links">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/explore">Explore</a></li>
+              <li><a href="/create">Create</a></li>
+            </ul>
+          </nav>
+          <nav class="main">
+            <ul>
+              <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="#">
+                  <input type="text" name="query" placeholder="Search" />
+                </form>
+              </li>
+              <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+      <!-- Menu -->
+        <section id="menu">
+
+          <!-- Search -->
+            <section>
+              <form class="search" method="get" action="#">
+                <input type="text" name="query" placeholder="Search" />
+              </form>
+            </section>
+
+          <!-- Links -->
+            <section>
+              <ul class="links">
+                <li>
+                  <a href="/">
+                    <h3>Home</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="/explore">
+                    <h3>Explore</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="/create">
+                    <h3>Create</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="/profile">
+                    <h3>Profile</h3>
+                  </a>
+                </li>
+                <li>
+                  <a href="/signup">
+                    <h3>Sign Up</h3>
+                  </a>
+                </li>
+              </ul>
+            </section>
+
+          <!-- Actions -->
+            <section>
+              <ul class="actions stacked">
+                <li><a href="/login" class="button large fit">Log In</a></li>
+              </ul>
+            </section>
+
+        </section>
+
+      <!-- Main -->
+        <div id="main">
+
+          <!-- Post -->
+            <article class="post">
+              <header>
+                <div id="headers" class="title">
+                  <h2><a href="/profile">Profile Page</a></h2>
+                  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                </div>
+              </header>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/account">Account</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/follow/<%= user._id %>">Following</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="/topic">Recently Viewed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/topic">Recommended</a>
+                  </li> -->
+                </ul>
+
+              <div class="container">
+                  <div class="row" id="profileBox">
+                      <!-- LOCAL INFORMATION -->
+                      <div class="col-sm-6" id="localBox">
+                          <div class="well">
+                              <h3><span class="fa fa-user"></span> Local</h3>
+
+                              <% if (user.local.email) { %>
+                                  <p>
+                                    <strong>username</strong>: <%= user.local.username %><br>
+                                      <strong>id</strong>: <%= user._id %><br>
+                                      <strong>email</strong>: <%= user.local.email %><br>
+                                      <!-- <strong>password</strong>: <%= user.local.password %> -->
+                                  </p>
+
+                                  <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                              <% } else { %>
+                                  <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                              <% } %>
+
+                          </div>
+                      </div>
+
+                    </div>
+
+      <!-- Footer -->
+        <section id="footer">
+          <ul class="icons">
+            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+        </section>
+
+    </div>
+
+  <!-- Scripts -->
+  	<script src="/main.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

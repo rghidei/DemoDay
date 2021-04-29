@@ -27,9 +27,6 @@
                   <li><a href="/">Home</a></li>
   								<li><a href="/explore">Explore</a></li>
   								<li><a href="/login">Create</a></li>
-                  <li><a href="/profile">Profile</a></li>
-
-
   							</ul>
   						</nav>
   						<nav class="main">
@@ -71,13 +68,18 @@
                       </a>
   									</li>
   									<li>
-  										<a href="/login">
+  										<a href="/create">
   											<h3>Create</h3>
+  										</a>
+  									</li>
+                    <li>
+  										<a href="/profile">
+  											<h3>Profile</h3>
   										</a>
   									</li>
   									<li>
   										<a href="/signup">
-  											<h3>SIGNUP</h3>
+  											<h3>Sign Up</h3>
   										</a>
   									</li>
   								</ul>
@@ -107,11 +109,11 @@
   										<h2><a href="#"><strong>Title:</strong></a><%= messages[i].dicuss %></h2>
   									</div>
   									<div class="meta">
-                      <span class="published">Time:<strong><%= messages[i].timestamp %></strong></span>
-  										<span class="author" id="postid"><%= messages[i]._id %></span>
+                      <span class="published">Time:<strong><%= helpers.getDate(messages[i].timestamp) %></strong></span>
+  										<span class="author hid" id="postid"><%= messages[i]._id %></span>
   									</div>
   								</header>
-  								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+  								<a href="#" class="image featured"><img src="<%= messages[i].img %>" alt="" /></a>
   								<p><strong>Background:</strong><%= messages[i].background %></p>
   								<footer>
   									<ul class="actions">
@@ -121,7 +123,6 @@
   										<li><a href="#"><strong>Topic Tag: </strong></a><%= messages[i].tag %></li>
   										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong></a><%= messages[i].thumbUp %></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
-                      <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li>
                       <li>
                       <form class="" action="javascript:void(0)" method="put">
                       <button data-userId="<%= user._id %>" class="followBtn" type="submit"><strong>Follow Debate</strong></button>
@@ -138,7 +139,7 @@
   			</div>
 
 </div>
-<script src="/main.js"></script>
+<script src="/follow.js"></script>
 <script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/browser.min.js"></script>
 <script src="/assets/js/breakpoints.min.js"></script>

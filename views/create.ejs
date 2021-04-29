@@ -3,8 +3,11 @@
 <head>
     <title>Create</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
 </head>
 <body>
   <body class="single is-preload">
@@ -20,7 +23,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/explore">Explore</a></li>
                 <li><a href="/create" type="submit" >Create</a></li>
-                <li><a href="/profile">Profile</a></li>
+                <!-- <li><a href="/profile">Profile</a></li> -->
                 <!-- <li><a href="#">Tempus</a></li>
                 <li><a href="#">Adipiscing</a></li> -->
               </ul>
@@ -60,7 +63,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="/explore">
                       <h3>Explore</h3>
                       <p>Sed vitae justo condimentum</p>
                     </a>
@@ -72,8 +75,14 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/">
-                      <h3>SIGNUP</h3>
+                    <a href="/profile">
+                      <h3>Profile</h3>
+                      <p>Porta lectus amet ultricies</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/signup">
+                      <h3>Sign Up</h3>
                       <p>Porta lectus amet ultricies</p>
                     </a>
                   </li>
@@ -96,62 +105,56 @@
               <article class="post">
                 <header>
                   <div class="title">
-                    <h2><a href="#">Demo Day Project</a></h2>
-                    <p>Create A New Discussion</p>
+                    <h2><a href="/create">Create A New Discussion</a></h2>
                   </div>
-                  <!-- <div class="meta">
-                    <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                    <a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-                  </div> -->
-                </header>
-                <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-                <div class="container">
 
-                    <div class="page-header text-center">
-                        <h1><span class="fa fa-anchor"></span> Create Page</h1>
-                        <a href="/profile" class="btn btn-default btn-sm">Back to Profile</a>
-                        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                </header>
+                <div class="container" id="createContainer">
+
+                    <div class="page-header text-center" id="createHeader">
+                      <h3>Create Debate Statment</h3>
+                      <h2>Enter discussion details</h2>
+                      <a href="/profile" class="btn btn-default btn-sm">Back to Profile</a>
+                      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                     </div>
 
                     <div class="row">
 
 
-                        <div class="col-sm-6">
-                          <h3>Create Debate Statment</h3>
-                          <!-- <ul class="messages">
-                          <% for(var i=0; i<messages.length; i++) {%>
-                            <li class="message">
-                              <span><%= user.local.email %></span>
-                              <span><%= messages[i].tag %></span>
-                              <span><%= messages[i].dicuss %></span>
-                              <span><%= messages[i].background %></span>
-                              <span class="hide"><%= messages[i].thumbUp %></span>
-                              <span class="hide"><%= messages[i].thumbDown%></span>
-                              <span><%= (messages[i].thumbUp - messages[i].thumbDown)%></span>
-                              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-                              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                            </li>
-                          <% } %>
-                          </ul> -->
+                        <div class="col-sm-6" id="createBox">
 
-                          <h2>Enter discussion details</h2>
 
-                          <form action="/create" method="POST">
-                            <select class="tag" name="tag">
-                              <option  value="History">History</option>
+                          <form action="/create" method="POST" enctype='multipart/form-data'>
+                            <div class="col-12">
+                              <label for="inputAddress" class="form-label">Discussion Title</label>
+                              <input type="text" class="form-control" id="inputAddress" placeholder="Provide a brief title describing your discussion topic">
+                            </div>
+                            <div class="mb-3">
+                              <label for="formGroupExampleInput" class="form-label">Discussion Title</label>
+                              <input type="text" class="form-control" placeholder="Provide a brief title describing your discussion topic." id="formGroupExampleInput"  name="dicuss">
+                            </div>
+                            <label for="inputState" class="form-label">Discussion Tag: Add tags related to the discussion.</label>
+                            <select id="inputState" placeholder="Add tags related to the discussion"name="tag" class="form-select tag">
+                              <option placeholder="Add tags related to the discussion" selected>Choose...</option>
+                              <option value="History">History</option>
                               <option value="Geography">Geography</option>
-                              <option  value="Film">Film</option>
+                              <option value="Film">Film</option>
                               <option value="Music">Music</option>
-                              <option  value="Sports">Sports</option>
+                              <option value="Sports">Sports</option>
                               <option value="Science">Science</option>
-                              <option  value="Politics">Politics</option>
+                              <option value="Politics">Politics</option>
                               <option value="Ethics">Ethics</option>
-                              <option  value="Global">Global</option>
+                              <option value="Global">Global</option>
                             </select>
-                            <input class="form-control" placeholder="Provide a bried title describing your thesis" type="text" name="dicuss" value="">
-                            <input class="form-control" placeholder="Add information revelant to your discussion" type="text" name="background" value="">
-                            <button type="submit">Submit</button>
+                            <div class="mb-3">
+                              <label for="exampleFormControlTextarea1" class="form-label">Background(Optional)</label>
+                              <textarea class="form-control" type="text" placeholder="Add information revelant to your discussion. Add information about the parameters of this discussion here." name="background" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                              <label for="formFile" class="form-label">Add Image</label>
+                              <input class="form-control" name="file" type="file" id="formFile">
+                            </div>
+                            <input type="submit" value="Upload">
                           </form>
                         </div>
 

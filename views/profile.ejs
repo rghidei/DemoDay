@@ -23,7 +23,6 @@
               <li><a href="/">Home</a></li>
               <li><a href="/explore">Explore</a></li>
               <li><a href="/create">Create</a></li>
-              <li><a href="/profile">Profile</a></li>
             </ul>
           </nav>
           <nav class="main">
@@ -70,8 +69,13 @@
                   </a>
                 </li>
                 <li>
+                  <a href="/profile">
+                    <h3>Profile</h3>
+                  </a>
+                </li>
+                <li>
                   <a href="/signup">
-                    <h3>SIGNUP</h3>
+                    <h3>Sign Up</h3>
                   </a>
                 </li>
               </ul>
@@ -92,91 +96,102 @@
           <!-- Post -->
             <article class="post">
               <header>
-                <div class="title">
+                <div id="headers" class="title">
                   <h2><a href="/profile">Profile Page</a></h2>
                   <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                 </div>
               </header>
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/topic">Responded</a>
+                    <a class="nav-link active" aria-current="page" href="/account">Account</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/topic">Following</a>
+                    <a class="nav-link" href="/follow/<%= user._id %>">Following</a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" href="/topic">Recently Viewed</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/topic">Recommended</a>
-                  </li>
+                  </li> -->
                 </ul>
 
               <div class="container">
-                  <div class="row">
+                <h3>Activity</h3>
+                  <div class="row" id="profileBox">
                       <!-- LOCAL INFORMATION -->
-                      <div class="col-sm-6">
-                          <div class="well">
-                              <h3><span class="fa fa-user"></span> Local</h3>
-
-                              <% if (user.local.email) { %>
-                                  <p>
-                                      <strong>id</strong>: <%= user._id %><br>
-                                      <strong>email</strong>: <%= user.local.email %><br>
-                                      <strong>password</strong>: <%= user.local.password %>
-                                  </p>
-
-                                  <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                              <% } else { %>
-                                  <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                              <% } %>
-
-                          </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <h3>Activity</h3>
+                      <div class="col-sm-6" id="localBox">
                         <h2>Created Discussions</h2>
-                        <ul class="messages">
+                        <ul class="messages scroll">
                         <% for(var i=0; i<messages.length; i++) {%>
-                          <li id="<%= messages[i]._id%>" class="message">
-                            <div id="postBox">
-                            <a class="id" href="/stage/<%=messages[i]._id %>">
+                        <%  if (messages[i].userName === user.local.username) { %>
+                          <li id="<%= messages[i]._id%>" class="message well">
+                            <!-- <div id="postBox"> -->
+                            <!-- <a class="id" href="/stage/<%=messages[i]._id %>">
                             <span class="user"><strong>Username:</strong><%= messages[i].userName %></span>
                             <span class="tag"><strong>Tag:</strong><%= messages[i].tag %></span>
                             <span class="dicuss"><strong>Statment:</strong><%= messages[i].dicuss %></span>
                             <span class="info"><strong>Background:</strong><%= messages[i].background %></span>
                             </a>
-                            <span class="time name"><strong>Time:</strong><%= messages[i].timestamp %></span>
-                            <span class="thumb"><%= messages[i].thumbUp %></span>
+                            <span class="time name"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></span>
+                            <span class="numPost"><%= messages[i].thumbUp %></span>
                             <span class="postId"><strong>ID:</strong><span><%= messages[i]._id %></span></span>
-                            <span><i class="fa fa-thumbs-up profileT" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                          </div>
+                            <span><i class="fa fa-thumbs-up postThumb" aria-hidden="true"></i></span>
+                            <span><i class="fa fa-trash postTrash" aria-hidden="true"></i></span> -->
+
+                            <article class="mini-post">
+                              <header>
+                                <h3 class="user"><a href="/stage/<%=messages[i]._id %>"><strong>Title:</strong></a><%= messages[i].dicuss %></h3>
+                                <time class="published time name" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
+                                <span class="user author"><strong>Author:</strong><%= messages[i].userName %></span>
+                              </header>
+                              <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
+                              <footer>
+                                <ul>
+                                  <li><i class="fa fa-thumbs-up postThumb" aria-hidden="true"></i><strong class="numPost"><%= messages[i].thumbUp %></strong></li>
+                                  <li><i class="fa fa-trash postTrash" aria-hidden="true"></i></li>
+                                </ul>
+
+                              </footer>
+                            </article>
                           </li>
 
-                        <% } %>
+                        <% }} %>
                         </ul>
-                        <ul class="comments">
-                          <h2>Created Comments</h2>
+
+                      </div>
+                      <div class="col-sm-6" id="actBox">
+                        <h2>Created Comments</h2>
+
+                        <ul class="comments scroll">
                         <% for(var i=0; i<comments.length; i++) {%>
-                          <li class="comments">
-                            <span><%= comments[i].msg %></span>
-                            <span class="hide"><%= comments[i].side %></span>
-                            <span class="hide"><%= comments[i].thumbUp %></span>
-                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+                          <li class="comments box">
+                            <article class="mini-post">
+                              <header>
+                                  <h3><a href="#" class="icon solid fa-heart comThumb"><strong># Of Likes: </strong><%= comments[i].thumbUp %></a></h3>
+                                  <h3><i class="fa fa-trash comTrash" aria-hidden="true"><strong>Trash: </strong></i></h3>
+
+                                <h3><a href="#"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
+                                <h2><a href="#" class="author"><strong>Author:</strong><%= comments[i].userName %></a></h2>
+                              </header>
+                              <footer>
+
+                              </footer>
+                            </article>
                           </li>
                         <% } %>
                         </ul>
                       </div>
                     </div>
-                    <div class="row">
-                        <!-- LOCAL INFORMATION -->
+                    <!-- <div class="row">
+                        LOCAL INFORMATION
                         <div class="col-sm-6 well">
                               <h3><a href="/topic">List Of Recommended Posts</a></h3>
                               <article class="mini-post">
           											<header>
           												<h3><a href="#"><strong>Title:</strong></a></h3>
           												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
+                                  <a href="#" class="author"><strong>Author:</strong></a>
           												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
           											</header>
           											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
@@ -188,7 +203,7 @@
       											<header>
       												<h3><a href="#"><strong>Title:</strong></a></h3>
       												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-      												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
+      												<a href="#" class="author"><strong>Author:</strong></a>
       											</header>
       											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
       										</article>
@@ -219,7 +234,7 @@
                           </div>
                         </div>
                   </article>
-                </div>
+                </div> -->
 
       <!-- Footer -->
         <section id="footer">

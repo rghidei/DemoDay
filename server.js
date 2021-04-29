@@ -3,8 +3,9 @@
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
+const upload = require('express-fileupload')
 var app      = express();
-
+require('dotenv').config()
 var port     = process.env.PORT || 8080;
 const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID
@@ -40,6 +41,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true, useUnifiedTopology: true }));
 app.use(express.static('public'))
+app.use(upload())
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 

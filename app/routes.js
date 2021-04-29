@@ -1,9 +1,10 @@
 module.exports = function(app, passport, db, ObjectID) {
 const {ObjectId} = require('mongodb');
+const helpers = require('./helpers.js')
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
-    app.get('/', function(req, res) {
+    app.get('/', isLoggedIn, function(req, res) {
       db.collection('messages').find().sort({timestamp: -1}).toArray((err, recResult) => {
         if (err) return console.log(err)
         db.collection('messages').find().toArray((err, popResult) => {
@@ -20,12 +21,13 @@ const {ObjectId} = require('mongodb');
                 return B_COMES_BEFORE_A;
               }
           });
-          // console.log(postsByLikes)
+          console.log(postsByLikes.length)
           if (err) return console.log(err)
           res.render('index.ejs', {
             user : req.user,
             postsByLikes: postsByLikes,
-            messages: recResult
+            messages: recResult,
+            helpers: helpers
           })
         })
       })
@@ -43,7 +45,8 @@ const {ObjectId} = require('mongodb');
         if (err) return console.log(err)
         res.render('topic.ejs', {
           user : req.user,
-          messages: result
+          messages: result,
+          helpers: helpers
         })
       })
     });
@@ -52,11 +55,13 @@ const {ObjectId} = require('mongodb');
         db.collection('messages').find().toArray((err, msgResult) => {
           if (err) return console.log(err)
           db.collection('comments').find().toArray((err, comResult) => {
+            console.log(comResult.length)
             if (err) return console.log(err)
             res.render('profile.ejs', {
               user : req.user,
               comments: comResult,
-              messages: msgResult
+              messages: msgResult,
+              helpers: helpers
             })
           })
         })
@@ -75,7 +80,7 @@ const {ObjectId} = require('mongodb');
     // Stage Section
     app.get('/stage/:msgId', isLoggedIn, function(req, res) {
         db.collection('messages').findOne({_id: ObjectId(req.params.msgId)},(err, msgResult) => {
-          // console.log(req.params.msgId, "stagemsgid")
+          // console.log(msgResult, "hello")
           if (err) return console.log(err)
           db.collection('comments').find({msgId: req.params.msgId}).toArray((err, comResult) => {
             var comsByLikes = comResult.sort(function (comA, comB) {
@@ -95,7 +100,8 @@ const {ObjectId} = require('mongodb');
             res.render('stage.ejs', {
               user : req.user,
               comsByLikes: comsByLikes,
-              message: msgResult
+              message: msgResult,
+              helpers: helpers
             })
           })
         })
@@ -123,9 +129,19 @@ const {ObjectId} = require('mongodb');
         if (err) return console.log(err)
         res.render('follow.ejs', {
           user : req.user,
-          messages: result
+          messages: result,
+          helpers: helpers
         })
       })
+    });
+
+    app.get('/account', isLoggedIn, function(req, res) {
+        db.collection('messages').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          res.render('account.ejs', {
+            user : req.user
+          })
+        })
     });
 
 
@@ -139,28 +155,35 @@ const {ObjectId} = require('mongodb');
 
     //create borad
     app.post('/create', (req, res) => {
-      console.log(req.body._id, "candy")
-      let document =
-      {userName: req.user.local.username,
-      tag: req.body.tag,
+      if(req.files){
+        console.log("usgai", req.files)
+        var file = req.files.file
+        var fileName = file.name
+        console.log(fileName)
+        file.mv('public/uploads/'+fileName, function (err){
+          if (err) {
+            res.send(err)
+          }
+        })
+      }
+      db.collection('messages').insertOne({userName: req.user.local.username,
+       tag: req.body.tag,
        dicuss: req.body.dicuss,
        background: req.body.background,
+       img: "/uploads/" + fileName,
        thumbUp: 0,
        timestamp: new Date,
-       followers: []
-     }
-      db.collection('messages').insertOne(document, (err, result) => {
-        // console.log(document)
+       followers: []}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/stage/' + result.ops[0]._id)
       })
     })
 
+
     // Stage board
     app.post('/comments', (req, res) => {
-      db.collection('comments').save({msg: req.body.msg, side: req.body.side, msgId: req.body.msgId, thumbUp: 0, timestamp: new Date}, (err, result) => {
-        // console.log(result)
+      db.collection('comments').save({userName: req.user.local.username, msg: req.body.msg, side: req.body.side, msgId: req.body.msgId, thumbUp: 0, timestamp: new Date}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database', result)
         res.redirect('/stage/' + result.ops[0].msgId)
@@ -185,7 +208,21 @@ const {ObjectId} = require('mongodb');
         res.send(result)
       })
     })
-
+    app.put('/cindy', (req, res) => {
+      db.collection('comments')
+      .findOneAndUpdate({_id: ObjectID(req.body.comId)}, {
+        $set: {
+          thumbUp:req.body.thumbUp + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: true
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+    //bob = post
     app.put('/stage/bob', (req, res) => {
       db.collection('messages')
       .findOneAndUpdate({_id: ObjectID(req.body.postId)}, {
@@ -200,7 +237,7 @@ const {ObjectId} = require('mongodb');
         res.send(result)
       })
     })
-
+    //greg = com
     app.put('/stage/greg', (req, res) => {
       db.collection('comments')
       .findOneAndUpdate({_id: ObjectID(req.body.comId)}, {
@@ -238,14 +275,15 @@ const {ObjectId} = require('mongodb');
     })
 
     app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({tag: req.body.tag, dicuss: req.body.dicuss, background: req.body.background}, (err, result) => {
+      console.log('friends')
+      db.collection('messages').findOneAndDelete({_id: ObjectID(req.body.postId)}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
     })
 
-    app.delete('/msgThree', (req, res) => {
-      db.collection('comments').findOneAndDelete({msg: req.body.msg, side: req.body.side}, (err, result) => {
+    app.delete('/comments', (req, res) => {
+      db.collection('comments').findOneAndDelete({_id: ObjectID(req.body.comId)}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })

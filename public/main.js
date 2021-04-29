@@ -1,15 +1,19 @@
-var thumbUp = document.getElementsByClassName("profileT");
-var trash = document.getElementsByClassName("fa-trash");
+//Profile//
+var thumbUpPost = document.getElementsByClassName("postThumb");
+var thumbUpCom = document.getElementsByClassName("comThumb");
+var trashPost = document.getElementsByClassName("postTrash");
+var trashCom = document.getElementsByClassName("comTrash");
 
 
-Array.from(thumbUp).forEach(function(element) {
+
+Array.from(thumbUpPost).forEach(function(element) {
       element.addEventListener('click', function(){
       console.log('panda')
         const tag = this.parentNode.parentNode.querySelector('.tag').innerText
         const dicuss = this.parentNode.parentNode.querySelector('.dicuss').innerText
         const background = this.parentNode.parentNode.querySelector('.info').innerText
         const postId = this.parentNode.parentNode.querySelector('.postId span').innerText
-        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumb').innerText)
+        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.numPost').innerText)
         console.log(tag, dicuss, background, postId, thumbUp)
         fetch('messages', {
           method: 'put',
@@ -33,13 +37,42 @@ Array.from(thumbUp).forEach(function(element) {
       });
 });
 
-Array.from(trash).forEach(function(element) {
+Array.from(thumbUpCom).forEach(function(element) {
+      element.addEventListener('click', function(){
+      console.log('panda')
+        const msg = this.parentNode.parentNode.querySelector('.msg').innerText
+        const side = this.parentNode.parentNode.querySelector('.side').innerText
+        const comId = this.parentNode.parentNode.querySelector('.comId').innerText
+        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.numCom').innerText)
+        console.log(msg, side, comId, comId, thumbUp)
+        fetch('cindy', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            'msg': msg,
+            'side': side,
+            'timestamp': new Date,
+            'comId': comId,
+            'thumbUp': thumbUp
+          })
+        })
+        .then(response => {
+          if (response.ok) return response.json()
+        })
+        .then(data => {
+          console.log(data)
+          window.location.reload(true)
+        })
+      });
+});
+
+Array.from(trashPost).forEach(function(element) {
+  console.log('honey')
       element.addEventListener('click', function(){
         const tag = this.parentNode.parentNode.querySelector('.tag').innerText
         const dicuss = this.parentNode.parentNode.querySelector('.dicuss').innerText
         const background = this.parentNode.parentNode.querySelector('.info').innerText
-        const objectId = this.parentNode.parentNode.querySelector('.postId').innerText
-        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumb').innerText)
+        const postId = this.parentNode.parentNode.querySelector('.postId span').innerText
         fetch('messages', {
           method: 'delete',
           headers: {
@@ -48,8 +81,7 @@ Array.from(trash).forEach(function(element) {
             'tag': tag,
             'dicuss': dicuss,
             'background': background,
-            '_id': objectId,
-            'timestamp': new Date
+            'postId': postId
           })
         }).then(function (response) {
           window.location.reload()
@@ -57,25 +89,24 @@ Array.from(trash).forEach(function(element) {
       });
 });
 
-document.querySelector('.followBtn').addEventListener('click', addPost)
-function addPost(item){
-  console.log('bananas')
-  const user = item.currentTarget.getAttribute('data-userId')
-  const postId =  document.querySelector('#postid').innerText
-  console.log(postId, user)
-  fetch('/follow/add', {
-  method: 'put',
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify({
-        'postId': postId,
-        'user': user
-      })
-    })
-    .then(response => {
-      if (response.ok) return response.json()
-    })
-    .then(data => {
-      console.log(data)
-      window.location = '/follow/' + user
-    })
-  };
+Array.from(trashCom).forEach(function(element) {
+  console.log('blueberry')
+      element.addEventListener('click', function(){
+        const msg = this.parentNode.parentNode.querySelector('.msg').innerText
+        const side = this.parentNode.parentNode.querySelector('.side').innerText
+        const comId = this.parentNode.parentNode.querySelector('.comId').innerText
+        fetch('comments', {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            'msg': msg,
+            'side': side,
+            'comId': comId
+
+          })
+        }).then(function (response) {
+          window.location.reload()
+        })
+      });
+});
