@@ -230,7 +230,8 @@ input, select, textarea {
 	}
 
 	h5 {
-		font-size: 0.7em;
+		font-size: 1em;
+		color: #428bca;
 	}
 
 	h6 {

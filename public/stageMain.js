@@ -39,7 +39,7 @@ Array.from(commenThumbUp).forEach(function(element) {
         const msg = this.parentNode.parentNode.querySelector('.msg').innerText
         const side = this.parentNode.parentNode.querySelector('.side').innerText
         const comId = this.parentNode.parentNode.querySelector('.comId span').innerText
-        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbCom').innerText)
+        const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbComments').innerText)
         console.log(msg, side, comId, thumbUp)
         fetch('greg', {
           method: 'put',

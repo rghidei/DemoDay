@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Create</title>
+    <title>Create1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -114,8 +114,8 @@
                     <div class="page-header text-center" id="createHeader">
                       <h3>Create Debate Statment</h3>
                       <h2>Enter discussion details</h2>
-                      <a href="/profile" class="btn btn-default btn-sm">Back to Profile</a>
-                      <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                      <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
+
                     </div>
 
                     <div class="row">
@@ -125,16 +125,12 @@
 
 
                           <form action="/create" method="POST" enctype='multipart/form-data'>
-                            <div class="col-12">
-                              <label for="inputAddress" class="form-label">Discussion Title</label>
-                              <input type="text" class="form-control" id="inputAddress" placeholder="Provide a brief title describing your discussion topic">
-                            </div>
                             <div class="mb-3">
-                              <label for="formGroupExampleInput" class="form-label">Discussion Title</label>
-                              <input type="text" class="form-control" placeholder="Provide a brief title describing your discussion topic." id="formGroupExampleInput"  name="dicuss">
+                              <label id="label" for="formGroupExampleInput" class="form-label">Discussion Title</label>
+                              <input id="in" type="text" class="form-control" placeholder="Provide a brief title describing your discussion topic." id="formGroupExampleInput"  name="dicuss">
                             </div>
-                            <label for="inputState" class="form-label">Discussion Tag: Add tags related to the discussion.</label>
-                            <select id="inputState" placeholder="Add tags related to the discussion"name="tag" class="form-select tag">
+                            <label id="label" for="inputState" class="form-label">Discussion Tag: Add tags related to the discussion.</label>
+                            <select  id="in" placeholder="Add tags related to the discussion"name="tag" class="form-select tag">
                               <option placeholder="Add tags related to the discussion" selected>Choose...</option>
                               <option value="History">History</option>
                               <option value="Geography">Geography</option>
@@ -145,23 +141,67 @@
                               <option value="Politics">Politics</option>
                               <option value="Ethics">Ethics</option>
                               <option value="Global">Global</option>
+                              <option value="Global">Technology</option>
+                              <option value="Global">Health</option>
+                              <option value="Global">Economy</option>
+                              <option value="Global">Law</option>
+                              <option value="Global">Education</option>
+                              <option value="Global">Philosophy</option>
+                              <option value="Global">Human Rights</option>
+                              <option value="Global">Culture</option>
+                              <option value="Global">Entertainment</option>
+                              <option value="Environment">Environment</option>
+                              <option value="Pandemics">Pandemics</option>
+                              <option value="Art">Art</option>
+                              <option value="MediaNews">MediaNews</option>
+                              <option value="Internet">Internet</option>
+                              <option value="Animals">Animals</option>
+                              <option value="Books">Books</option>
+                              <option value="Fanasty">Fanasty</option>
+                              <option value="UFO">UFO</option>
+                              <option value="Science">Science</option>
+                              <option value="Travel">Travel</option>
+                              <option value="Psychology">Psychology</option>
+                              <option value="Future">Future</option>
+                              <option value="Policy">Policy</option>
+                              <option value="Morality">Morality</option>
+                              <option value="Belief">Belief</option>
+                              <option value="MentalHealth">Mental Health</option>
+                              <option value="Identity">Identity</option>
+                              <option value="Journalism">Journalism</option>
+                              <option value="Fandom">Fandom</option>
+                              <option value="Space">Space</option>
+                              <option value="SoicalMedia">SoicalMedia</option>
+                              <option value="Freedom">Freedom</option>
+                              <option value="Games">Games</option>
+                              <option value="Privacy">Privacy</option>
+                              <option value="Capitalism">Capitalism</option>
+                              <option value="FreeWill">Free Will</option>
+                              <option value="Relationships">Relationships</option>
+                              <option value="Business">Business</option>
+                              <option value="Money">Money</option>
+                              <option value="Literature">Literature</option>
+
+
+
+
+
                             </select>
                             <div class="mb-3">
-                              <label for="exampleFormControlTextarea1" class="form-label">Background(Optional)</label>
-                              <textarea class="form-control" type="text" placeholder="Add information revelant to your discussion. Add information about the parameters of this discussion here." name="background" id="exampleFormControlTextarea1" rows="3"></textarea>
+                              <label id="label" for="exampleFormControlTextarea1" class="form-label">Background(Optional)</label>
+                              <textarea id="in" class="form-control" type="text" placeholder="Add information revelant to your discussion. Add information about the parameters of this discussion here." name="background" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                              <label for="formFile" class="form-label">Add Image</label>
-                              <input class="form-control" name="file" type="file" id="formFile">
+                              <label id="label" for="formFile" class="form-label">Add Image</label>
+                              <input id="file" class="form-control" name="file" type="file" id="formFile">
+                              <input id="button" type="submit" value="Upload">
                             </div>
-                            <input type="submit" value="Upload">
                           </form>
                         </div>
 
                 </div>
 
-                <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
+
                 <footer>
 
                 </footer>

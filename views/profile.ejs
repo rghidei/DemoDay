@@ -94,14 +94,15 @@
         <div id="main">
 
           <!-- Post -->
-            <article class="post">
+            <article id="profileCon" class="post">
               <header>
                 <div id="headers" class="title">
-                  <h2><a href="/profile">Profile Page</a></h2>
+                  <h2 id="hAct"><a href="/profile">Profile Page</a></h2>
+                  <h3 id="hAct"><a href="/profile">Activity</a></h3>
                   <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                 </div>
               </header>
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs" id="nav">
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/account">Account</a>
                   </li>
@@ -117,42 +118,32 @@
                 </ul>
 
               <div class="container">
-                <h3>Activity</h3>
                   <div class="row" id="profileBox">
                       <!-- LOCAL INFORMATION -->
                       <div class="col-sm-6" id="localBox">
-                        <h2>Created Discussions</h2>
-                        <ul class="messages scroll">
+                        <h2 id="htwo">Created Discussions</h2>
+                        <ul class="messages scroll hideList">
                         <% for(var i=0; i<messages.length; i++) {%>
                         <%  if (messages[i].userName === user.local.username) { %>
                           <li id="<%= messages[i]._id%>" class="message well">
-                            <!-- <div id="postBox"> -->
-                            <!-- <a class="id" href="/stage/<%=messages[i]._id %>">
-                            <span class="user"><strong>Username:</strong><%= messages[i].userName %></span>
-                            <span class="tag"><strong>Tag:</strong><%= messages[i].tag %></span>
-                            <span class="dicuss"><strong>Statment:</strong><%= messages[i].dicuss %></span>
-                            <span class="info"><strong>Background:</strong><%= messages[i].background %></span>
-                            </a>
-                            <span class="time name"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></span>
-                            <span class="numPost"><%= messages[i].thumbUp %></span>
-                            <span class="postId"><strong>ID:</strong><span><%= messages[i]._id %></span></span>
-                            <span><i class="fa fa-thumbs-up postThumb" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-trash postTrash" aria-hidden="true"></i></span> -->
+
 
                             <article class="mini-post">
                               <header>
-                                <h3 class="user"><a href="/stage/<%=messages[i]._id %>"><strong>Title:</strong></a><%= messages[i].dicuss %></h3>
-                                <time class="published time name" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
-                                <span class="user author"><strong>Author:</strong><%= messages[i].userName %></span>
+                                <a href="/stage/<%=messages[i]._id %>"><h3 class="Title"><strong>Title: </strong><%= messages[i].dicuss %></h3></a>
+                                <time class="published time name" datetime="2015-10-20"><strong>Time: </strong><%= helpers.getDate(messages[i].timestamp) %></time>
+                                <span class="name author"><strong>Author:</strong><%= messages[i].userName %></span>
+                                <span class="icon solid fa-heart postThumb numPost icons" ><strong># Of Likes: </strong><%= messages[i].thumbUp %></span>
+                                <span class="icons"> <i class="fa fa-trash postTrash" aria-hidden="true"></i></span>
+                                <!-- <ul>
+                                  <li class="hideList"><a href="#" class="icon solid fa-heart postThumb numPost"><strong># Of Likes: </strong><%= messages[i].thumbUp %></a></li>
+                                  <li class="hideList"><i class="fa fa-trash postTrash" aria-hidden="true"></i></li>
+                                </ul> -->
                               </header>
                               <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
-                              <footer>
-                                <ul>
-                                  <li><i class="fa fa-thumbs-up postThumb" aria-hidden="true"></i><strong class="numPost"><%= messages[i].thumbUp %></strong></li>
-                                  <li><i class="fa fa-trash postTrash" aria-hidden="true"></i></li>
-                                </ul>
+                              <span class="postid hid"><%=messages[i]._id %></span>
 
-                              </footer>
+
                             </article>
                           </li>
 
@@ -161,25 +152,28 @@
 
                       </div>
                       <div class="col-sm-6" id="actBox">
-                        <h2>Created Comments</h2>
+                        <h2 id="htwo">Created Comments</h2>
 
-                        <ul class="comments scroll">
+                        <ul class="comments scroll hideList">
                         <% for(var i=0; i<comments.length; i++) {%>
+                          <%  if (comments[i].userName === user.local.username) { %>
+
                           <li class="comments box">
                             <article class="mini-post">
                               <header>
-                                  <h3><a href="#" class="icon solid fa-heart comThumb"><strong># Of Likes: </strong><%= comments[i].thumbUp %></a></h3>
-                                  <h3><i class="fa fa-trash comTrash" aria-hidden="true"><strong>Trash: </strong></i></h3>
-
-                                <h3><a href="#"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
+                                <h3><a href="#" class="side title"><strong>Side:</strong><%= comments[i].side %></a></h3>
+                                <h3><a href="#" class="msg"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
                                 <h2><a href="#" class="author"><strong>Author:</strong><%= comments[i].userName %></a></h2>
+                                <h3 class="icons"><a href="#" class="icon solid fa-heart comThumb icons"><strong># Of Likes: </strong><%= comments[i].thumbUp %></a></h3>
+                                <h3 class="icons"><i class="fa fa-trash comTrash" aria-hidden="true"><strong>Trash: </strong></i></h3>
+                                <h3><a href="#" class="comId hid"><%= comments[i]._id %></a></h3>
                               </header>
                               <footer>
 
                               </footer>
                             </article>
                           </li>
-                        <% } %>
+                        <% }} %>
                         </ul>
                       </div>
                     </div>

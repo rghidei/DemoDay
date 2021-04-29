@@ -69,18 +69,17 @@ Array.from(thumbUpCom).forEach(function(element) {
 Array.from(trashPost).forEach(function(element) {
   console.log('honey')
       element.addEventListener('click', function(){
-        const tag = this.parentNode.parentNode.querySelector('.tag').innerText
-        const dicuss = this.parentNode.parentNode.querySelector('.dicuss').innerText
-        const background = this.parentNode.parentNode.querySelector('.info').innerText
-        const postId = this.parentNode.parentNode.querySelector('.postId span').innerText
+        const img = this.parentNode.parentNode.querySelector('.image').innerText
+        const dicuss = this.parentNode.parentNode.querySelector('.title').innerText
+        const postId = this.parentNode.parentNode.querySelector('.postid').innerText
+        console.log(dicuss, img, postId)
         fetch('messages', {
           method: 'delete',
           headers: {
             'Content-Type': 'application/json'},
           body: JSON.stringify({
-            'tag': tag,
             'dicuss': dicuss,
-            'background': background,
+            'img': img,
             'postId': postId
           })
         }).then(function (response) {
@@ -95,6 +94,7 @@ Array.from(trashCom).forEach(function(element) {
         const msg = this.parentNode.parentNode.querySelector('.msg').innerText
         const side = this.parentNode.parentNode.querySelector('.side').innerText
         const comId = this.parentNode.parentNode.querySelector('.comId').innerText
+        console.log(msg, side, comId)
         fetch('comments', {
           method: 'delete',
           headers: {

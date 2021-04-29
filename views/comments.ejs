@@ -3,11 +3,15 @@
 <head>
     <title>Create</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
 </head>
 <body>
-  <body class="single is-preload">
+  <body id="comBody" class="single is-preload">
 
     <!-- Wrapper -->
       <div id="wrapper">
@@ -17,10 +21,9 @@
             <h1><a href="index.html">Debate</a></h1>
             <nav class="links">
               <ul>
-                <li><a href="index.ejs">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/explore">Explore</a></li>
-                <li><a href="create.ejs" type="submit" >Create</a></li>
-                <li><a href="/profile">Profile</a></li>
+                <li><a href="/create" type="submit" >Create</a></li>
                 <!-- <li><a href="#">Tempus</a></li>
                 <li><a href="#">Adipiscing</a></li> -->
               </ul>
@@ -90,10 +93,10 @@
           </section>
 
         <!-- Main -->
-          <div id="main">
+          <div id="mainCom">
 
             <!-- Post -->
-              <article class="post">
+              <article id="commentCon" class="post">
                 <header>
                   <div class="title">
                     <h2><a href="#">comments</a></h2>
@@ -101,41 +104,32 @@
                   </div>
 
                 </header>
-                <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-                <div class="container">
+                <div class="container" id="commentContainer">
 
                     <div class="page-header text-center">
-                        <h1><span class="fa fa-anchor"></span> Create Page</h1>
-                        <a href="/profile" class="btn btn-default btn-sm">Back to Profile</a>
-                        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                        <h1><span class="fa fa-anchor"></span>Add Your Comment Below!</h1>
+                        <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
                     </div>
 
                     <div class="row">
 
 
-                      <div class="col-sm-6">
+                      <div class="col-sm-6" id="commentForm">
                         <h3>Add a Comment</h3>
-                        <ul class="comments">
-                        <% for(var i=0; i<comments.length; i++) {%>
-                          <li class="comments">
-                            <span><%= comments[i].msg %></span>
-                            <span><%= comments[i].side %></span>
-                            <span class="hide"><%= comments[i].thumbUp %></span>
-                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                          </li>
-                        <% } %>
-                        </ul>
 
                       <% if (user.local.email) { %>
                         <form action="/comments" method="POST">
-                          <input class="form-control" type="text" placeholder="Add Your Comment"value="" name="msg">
-                          <select  name="side">
-                            <option  value="Pro">Pro</option>
+                          <div class="mb-3">
+                            <label id="label" for="exampleFormControlTextarea1" class="form-label">What you think?</label>
+                            <textarea id="in" class="form-control" type="text" placeholder="Add Your Comment" name="msg" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          </div>
+                          <select id="select" name="side">
+                            <option selected>Choose...</option>
+                            <option value="Pro">Pro</option>
                             <option value="Con">Con</option>
                           </select>
-                          <input type="hidden" name="msgId" value="<%= msgId %>">
-                          <button type="submit">Submit</button>
+                          <input  type="hidden" name="msgId" value="<%= msgId %>">
+                          <button id="sumbit" type="submit">Submit</button>
                         </form>
                       </div>
                       <% } %>

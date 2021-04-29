@@ -20,7 +20,7 @@
 
   				<!-- Header -->
   					<header id="header">
-  						<h1><a href="index.html">Debate</a></h1>
+  						<h1><a href="index.html">GroupThought</a></h1>
   						<nav class="links">
   							<ul>
                   <li><a href="/">Home</a></li>
@@ -115,6 +115,7 @@
   								</header>
   								<a href="#" class="image featured"><img src="<%= postsByLikes[i].img %>" alt="pic" /></a>
   								<p><strong>Background: </strong><%= postsByLikes[i].background %></p>
+                  <span id="postid" class="hid"><%=postsByLikes[i]._id %></span>
   								<footer>
   									<ul class="actions">
   										<li><a href="/stage/<%=postsByLikes[i]._id %>" class="button large">Enter</a></li>
@@ -124,7 +125,9 @@
   										<li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong><%= postsByLikes[i].thumbUp %></a></li>
   										<li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
                       <li>
-                        <a href="/follow/<%= user._id %>"><button class="followBtn" type="submit"><strong>Follow Debate</strong></button>
+                        <form class="hid" action="javascript:void(0)" method="put">
+                        <button data-userId="<%= user._id %>" class="followBtn" type="submit"><strong>Follow Debate</strong></button>
+                        </form>
                       </li>
   									</ul>
   								</footer>
@@ -141,8 +144,8 @@
   							<section id="intro">
   								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
   								<header>
-  									<h2>Debate</h2>
-                    <p>Debate is designed to facilitate constructive discussion about the most important issues in the world.</p>
+  									<h2>GroupThought</h2>
+                    <p>GroupThought is designed to facilitate constructive discussion about the most important issues in the world.</p>
   								</header>
   							</section>
 
@@ -150,31 +153,6 @@
   							<section class="recentPost">
                   <h2>Recent Posts</h2>
   								<div class="mini-posts">
-
-  									<!-- 1 Mini Post -->
-  										<!-- <article class="mini-post">
-                        <ol class="messages">
-                        <% for(var i=0; i<messages.length && i < 5; i++) {%>
-                          <li class="message">
-                            <div id="postBox">
-                            <a href="/stage/<%=messages[i]._id %>">
-                            <span><%= messages[i].tag %></span>
-                            <span><%= messages[i].dicuss %></span>
-                            <span><%= messages[i].background %></span>
-                            </a>
-                            <span class="time name">Time: <%= messages[i].timestamp %></span>
-                            <span class="thumb"><%= messages[i].thumbUp %></span>
-                            <span class="hide"><%= messages[i]._id%></span>
-                            <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-                            <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-                          </div>
-                          </li>
-                        <% } %>
-                      </ol> -->
-
-  										<!-- </article> -->
-
-  									<!--2  Mini Post -->
 
 
   									<!-- 3 Mini Post -->
@@ -187,7 +165,7 @@
                           <time class="published" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
                           <h2><a href="#" class="author"><strong>Author:</strong><%= messages[i].userName %></a></h2>
                         </header>
-                        <a href="#" class="image"><strong>Img:</strong><img src="<%= messages[i].img %>" alt="" /></a>
+                        <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
   										</article>
                     </li>
                   </ol>
@@ -221,7 +199,9 @@
   						<!-- About -->
   							<section class="blurb">
   								<h2>About</h2>
-  								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
+  								<p>A tool to engage in thoughtful discussion, understand different points of view, and help with collaborative decision-making.
+Where users will be able to see and provide thorough and thoughtful arguments that support and do not support the topic at hand.
+</p>
   								<ul class="actions">
   									<li><a href="#" class="button">Learn More</a></li>
   								</ul>
