@@ -105,11 +105,11 @@
               <div class="container">
 
                   <div id="pageHeader" class="page-header text-center">
-                    <h3 id="hthree">Discussion</h3>
+                    <h3 id="hthree">Discussion Statement</h3>
                     <div id="postBox">
-                      <span id="discussion"><strong>Statment: </strong><%= message.dicuss %></span>
-                      <span class="infoStage"><strong>Background: </strong><%= message.background %></span>
-                      <span class="postIdStage hid"><span><%= message._id %></span></span>
+                      <h3 id="discussion"><%= message.dicuss %></h3>
+                      <p class="infoStage"><strong>Background: </strong><%= message.background %></p>
+                      <p class="postIdStage hid"><span><%= message._id %></span></p>
                       <span class="userStage"><strong>Username: </strong><%= message.userName %></span>
                       <span class="tagStage"><strong>Topic Tag: </strong><%= message.tag %></span>
                       <span class="time name"><strong>Posted: </strong><%= helpers.getDate(message.timestamp) %></span>
@@ -130,17 +130,14 @@
                       <li class="comments box">
                         <article class="mini-post">
                           <header>
-                            <h3 class="thumbComments"><%= comsByLikes[i].thumbUp %></h3>
-                            <h3><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></h3>
-                            <h3><a href="#" class="msg"><strong>Comment:</strong><%= comsByLikes[i].msg %></a></h3>
-                            <h3><a href="#" class="time"><strong>Time:</strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></h3>
-                            <h3><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+                            <h3 id="h"><a href="#" class="msg"><strong>Comment: </strong><%= comsByLikes[i].msg %></a></h3>
+                            <h3 id="h"><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+                            <span><a href="#" class="time"><strong>Time: </strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></span>
+                            <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
+                            <span class="thumbComments"><%= comsByLikes[i].thumbUp %></span>
                             <span class="hide side"><%= comsByLikes[i].side %></span>
                             <span class="comId hide"><span><%= comsByLikes[i]._id %></span></span>
                           </header>
-                          <footer>
-
-                          </footer>
                         </article>
                       </li>
                     <% }} %>
@@ -154,11 +151,12 @@
                       <li class="comments box">
                         <article class="mini-post">
                           <header>
-                            <h3><a href="#" class="thumbComments"><strong># Of Likes: </strong><%= comsByLikes[i].thumbUp %></a></h3>
-                            <h3><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></h3>
-                            <h3><a href="#" class="msg"><strong>Comment:</strong><%= comsByLikes[i].msg %></a></h3>
-                            <h3><a href="#" class="time"><strong>Time:</strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></h3>
-                            <h3><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+
+                            <h3 id="h"><a href="#" class="msg"><strong>Comment:</strong><%= comsByLikes[i].msg %></a></h3>
+                            <h3 id="h"><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+                            <span><a href="#" class="time"><strong>Time:</strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></span>
+                            <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
+                            <span><a href="#" class="thumbComments"><%= comsByLikes[i].thumbUp %></a></span>
                             <span class="hide side"><%= comsByLikes[i].side %></span>
                             <span class="comId hide"><span><%= comsByLikes[i]._id %></span></span>
                           </header>

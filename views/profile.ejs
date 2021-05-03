@@ -100,12 +100,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/follow/<%= user._id %>">Following</a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a class="nav-link" href="/topic">Recently Viewed</a>
-                  </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/topic">Recommended</a>
-                  </li> -->
+                    <a class="nav-link" href="/profile">Activity</a>
+                  </li>
                 </ul>
 
               <div class="container">
@@ -116,23 +113,19 @@
                         <ul class="messages scroll hideList">
                         <% for(var i=0; i<messages.length; i++) {%>
                         <%  if (messages[i].userName === user.local.username) { %>
-                          <li id="<%= messages[i]._id%>" class="message well">
+                          <li id="<%= messages[i]._id%>" class="message proLi">
 
 
                             <article class="mini-post">
                               <header>
                                 <a href="/stage/<%=messages[i]._id %>"><h3 class="Title"><strong>Title: </strong><%= messages[i].dicuss %></h3></a>
                                 <time class="published time name" datetime="2015-10-20"><strong>Time: </strong><%= helpers.getDate(messages[i].timestamp) %></time>
-                                <span class="name"><strong>Author:</strong><%= messages[i].userName %></span>
-                                <span class="icon solid fa-heart postThumb numPost icons" ><strong># Of Likes: </strong><%= messages[i].thumbUp %></span>
-                                <span class="icons"> <i class="fa fa-trash postTrash" aria-hidden="true"></i></span>
-                                <!-- <ul>
-                                  <li class="hideList"><a href="#" class="icon solid fa-heart postThumb numPost"><strong># Of Likes: </strong><%= messages[i].thumbUp %></a></li>
-                                  <li class="hideList"><i class="fa fa-trash postTrash" aria-hidden="true"></i></li>
-                                </ul> -->
+                                <span class="name hid"><strong>Author: </strong><%= messages[i].userName %></span>
+                                <span class="icon solid postThumb numPost icons"><strong>Likes: </strong><%= messages[i].thumbUp %></span>
+                                <span class="icons"><i class="fa fa-trash trash postTrash" aria-hidden="true"></i></span>
+                                <span id="Id" class="hid"><%=messages[i]._id %></span>
                               </header>
-                              <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
-                              <span class="postid hid"><%=messages[i]._id %></span>
+                              <img id="images" src="<%= messages[i].img %>" alt="" />
 
 
                             </article>
@@ -152,11 +145,11 @@
                           <li class="comments box">
                             <article class="mini-post">
                               <header>
-                                <h3><a href="#" class="side title"><strong>Side:</strong><%= comments[i].side %></a></h3>
-                                <h3><a href="#" class="msg"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
+                                <h3 id="h"><a href="#" class="side title"><strong>Side:</strong><%= comments[i].side %></a></h3>
+                                <h3 id="h"><a href="/stage/<%=comments[i].msgId %>" class="msg"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
                                 <h2><a href="#" class="author"><strong>Author:</strong><%= comments[i].userName %></a></h2>
-                                <h3 class="icons"><a href="#" class="icon solid fa-heart comThumb icons"><strong># Of Likes: </strong><%= comments[i].thumbUp %></a></h3>
-                                <h3 class="icons"><i class="fa fa-trash comTrash" aria-hidden="true"><strong>Trash: </strong></i></h3>
+                                <h3 class="icons"><a href="#" class="icon solid comThumb icons"><strong>Likes: </strong><%= comments[i].thumbUp %></a></h3>
+                                <h3 class="icons"><i class="fa fa-trash comTrash trash" aria-hidden="true"></i></h3>
                                 <h3><a href="#" class="comId hid"><%= comments[i]._id %></a></h3>
                               </header>
                               <footer>

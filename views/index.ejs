@@ -99,10 +99,10 @@
   							<article class="post">
   								<header>
   									<div class="title">
-  										<h2><a href="#"><strong>Title:</strong></a><%= postsByLikes[i].dicuss %></h2>
+  										<h2 id="h"><a href="#"><strong>Title: </strong></a><%= postsByLikes[i].dicuss %></h2>
   									</div>
   									<div class="meta">
-  										<time class="published" datetime=""><strong>Time:</strong><%=  helpers.getDate(postsByLikes[i].timestamp) %></time>
+  										<time class="published" datetime=""><strong>Time: </strong><%=  helpers.getDate(postsByLikes[i].timestamp) %></time>
   										<a href="#" class="author"><span class="name"><strong>Name: </strong><%= postsByLikes[i].userName %></span></a>
   									</div>
   								</header>
@@ -154,9 +154,9 @@
                     <li>
   										<article class="mini-post">
                         <header>
-                          <h3><a href="#"><strong>Title:</strong><%= messages[i].dicuss %></a></h3>
+                          <h3 id="h"><a href="/stage/<%=messages[i]._id %>"><strong>Title:</strong><%= messages[i].dicuss %></a></h3>
                           <time class="published" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
-                          <h2><a href="#" class="author"><strong>Author:</strong><%= messages[i].userName %></a></h2>
+                          <span><a href="#" ><strong>Author: </strong><%= messages[i].userName %></a></span>
                         </header>
                         <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
   										</article>
