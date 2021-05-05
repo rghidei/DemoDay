@@ -1,212 +1,214 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>Create1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+  <title>Create1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
+
 <body>
+
   <body class="single is-preload">
 
     <!-- Wrapper -->
-      <div id="wrapper">
+    <div id="wrapper">
 
-        <!-- Header -->
-          <header id="header">
-            <h1><a href="/">GroupThought</a></h1>
-            <nav class="links">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/explore">Explore</a></li>
-                <li><a href="/create" type="submit" >Create</a></li>
-                <!-- <li><a href="/profile">Profile</a></li> -->
-                <!-- <li><a href="#">Tempus</a></li>
-                <li><a href="#">Adipiscing</a></li> -->
-              </ul>
-            </nav>
-            <nav class="main">
-              <ul>
+      <!-- Header -->
+      <header id="header">
+        <h1><a href="/">GroupThought</a></h1>
+        <nav class="links">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/explore">Explore</a></li>
+            <li><a href="/create">Create</a></li>
+          </ul>
+        </nav>
+        <nav class="main">
+          <ul>
 
-                <li class="menu">
-                  <a class="fa-bars" href="#menu">Menu</a>
-                </li>
-              </ul>
-            </nav>
+            <li class="menu">
+              <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Menu -->
+      <section id="menu">
+
+        <!-- Search -->
+
+
+        <!-- Links -->
+        <section>
+          <ul class="links">
+            <li>
+              <a href="/">
+                <h3>Home</h3>
+              </a>
+            </li>
+            <li>
+              <a href="/explore">
+                <h3>Explore</h3>
+              </a>
+            </li>
+            <li>
+              <a href="/create">
+                <h3>Create</h3>
+              </a>
+            </li>
+            <li>
+              <a href="/profile">
+                <h3>Profile</h3>
+              </a>
+            </li>
+            <li>
+              <a href="/signup">
+                <h3>Sign Up</h3>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Actions -->
+        <section>
+          <ul class="actions stacked">
+            <li><a href="#" class="button large fit">Log In</a></li>
+          </ul>
+        </section>
+
+      </section>
+
+      <!-- Main -->
+      <div id="main">
+
+        <!-- Post -->
+        <article class="post">
+          <header>
+            <div class="title">
+              <h2><a href="/create">Create A New Discussion</a></h2>
+            </div>
+
           </header>
+          <div class="container" id="createContainer">
 
-        <!-- Menu -->
-          <section id="menu">
+            <div class="page-header text-center" id="createHeader">
+              <h3>Create Debate Statment</h3>
+              <h2>Enter discussion details</h2>
+              <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
 
-            <!-- Search -->
+            </div>
+
+            <div class="row">
 
 
-            <!-- Links -->
-              <section>
-                <ul class="links">
-                  <li>
-                    <a href="/">
-                      <h3>Home</h3>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/explore">
-                      <h3>Explore</h3>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/create">
-                      <h3>Create</h3>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/profile">
-                      <h3>Profile</h3>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/signup">
-                      <h3>Sign Up</h3>
-                    </a>
-                  </li>
-                </ul>
-              </section>
+              <div class="col-sm-6" id="createBox">
 
-            <!-- Actions -->
-              <section>
-                <ul class="actions stacked">
-                  <li><a href="#" class="button large fit">Log In</a></li>
-                </ul>
-              </section>
 
-          </section>
-
-        <!-- Main -->
-          <div id="main">
-
-            <!-- Post -->
-              <article class="post">
-                <header>
-                  <div class="title">
-                    <h2><a href="/create">Create A New Discussion</a></h2>
+                <form action="/create" method="POST" enctype='multipart/form-data'>
+                  <div class="mb-3">
+                    <label id="label" for="formGroupExampleInput" class="form-label">Discussion Title</label>
+                    <input id="in" type="text" class="form-control" placeholder="Provide a brief title describing your discussion topic." id="formGroupExampleInput" name="dicuss">
                   </div>
-
-                </header>
-                <div class="container" id="createContainer">
-
-                    <div class="page-header text-center" id="createHeader">
-                      <h3>Create Debate Statment</h3>
-                      <h2>Enter discussion details</h2>
-                      <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
-
-                    </div>
-
-                    <div class="row">
-
-
-                        <div class="col-sm-6" id="createBox">
-
-
-                          <form action="/create" method="POST" enctype='multipart/form-data'>
-                            <div class="mb-3">
-                              <label id="label" for="formGroupExampleInput" class="form-label">Discussion Title</label>
-                              <input id="in" type="text" class="form-control" placeholder="Provide a brief title describing your discussion topic." id="formGroupExampleInput"  name="dicuss">
-                            </div>
-                            <label id="label" for="inputState" class="form-label">Discussion Tag: Add tags related to the discussion.</label>
-                            <select  id="in" placeholder="Add tags related to the discussion"name="tag" class="form-select tag">
-                              <option placeholder="Add tags related to the discussion" selected>Choose...</option>
-                              <option value="History">History</option>
-                              <option value="Geography">Geography</option>
-                              <option value="Film">Film</option>
-                              <option value="Music">Music</option>
-                              <option value="Sports">Sports</option>
-                              <option value="Science">Science</option>
-                              <option value="Politics">Politics</option>
-                              <option value="Ethics">Ethics</option>
-                              <option value="Global">Global</option>
-                              <option value="Technology">Technology</option>
-                              <option value="Health">Health</option>
-                              <option value="Economy">Economy</option>
-                              <option value="Fashion">Fashion</option>
-                              <option value="Education">Education</option>
-                              <option value="Philosophy">Philosophy</option>
-                              <option value="Human Rights">Human Rights</option>
-                              <option value="Culture">Culture</option>
-                              <option value="Entertainment">Entertainment</option>
-                              <option value="Environment">Environment</option>
-                              <option value="Pandemics">Pandemics</option>
-                              <option value="Art">Art</option>
-                              <option value="MediaNews">MediaNews</option>
-                              <option value="Internet">Internet</option>
-                              <option value="Animals">Animals</option>
-                              <option value="Books">Books</option>
-                              <option value="Fanasty">Fanasty</option>
-                              <option value="UFO">UFO</option>
-                              <option value="Science">Science</option>
-                              <option value="Travel">Travel</option>
-                              <option value="Psychology">Psychology</option>
-                              <option value="Future">Future</option>
-                              <option value="Policy">Policy</option>
-                              <option value="Morality">Morality</option>
-                              <option value="Belief">Belief</option>
-                              <option value="MentalHealth">Mental Health</option>
-                              <option value="Identity">Identity</option>
-                              <option value="Journalism">Journalism</option>
-                              <option value="Fandom">Fandom</option>
-                              <option value="Space">Space</option>
-                              <option value="SoicalMedia">SoicalMedia</option>
-                              <option value="Freedom">Freedom</option>
-                              <option value="Games">Games</option>
-                              <option value="Privacy">Privacy</option>
-                              <option value="Capitalism">Capitalism</option>
-                              <option value="FreeWill">Free Will</option>
-                              <option value="Love">Love</option>
-                              <option value="Business">Business</option>
-                              <option value="Money">Money</option>
-                              <option value="Literature">Literature</option>
+                  <label id="label" for="inputState" class="form-label">Discussion Tag: Add tags related to the discussion.</label>
+                  <select id="in" placeholder="Add tags related to the discussion" name="tag" class="form-select tag">
+                    <option placeholder="Add tags related to the discussion" selected>Choose...</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Film">Film</option>
+                    <option value="Music">Music</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Science">Science</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Ethics">Ethics</option>
+                    <option value="Global">Global</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Health">Health</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Education">Education</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Human Rights">Human Rights</option>
+                    <option value="Culture">Culture</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Pandemics">Pandemics</option>
+                    <option value="Art">Art</option>
+                    <option value="MediaNews">MediaNews</option>
+                    <option value="Internet">Internet</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Books">Books</option>
+                    <option value="Fanasty">Fanasty</option>
+                    <option value="UFO">UFO</option>
+                    <option value="Science">Science</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Future">Future</option>
+                    <option value="Policy">Policy</option>
+                    <option value="Morality">Morality</option>
+                    <option value="Belief">Belief</option>
+                    <option value="MentalHealth">Mental Health</option>
+                    <option value="Identity">Identity</option>
+                    <option value="Journalism">Journalism</option>
+                    <option value="Fandom">Fandom</option>
+                    <option value="Space">Space</option>
+                    <option value="SoicalMedia">SoicalMedia</option>
+                    <option value="Freedom">Freedom</option>
+                    <option value="Games">Games</option>
+                    <option value="Privacy">Privacy</option>
+                    <option value="Capitalism">Capitalism</option>
+                    <option value="FreeWill">Free Will</option>
+                    <option value="Love">Love</option>
+                    <option value="Business">Business</option>
+                    <option value="Money">Money</option>
+                    <option value="Literature">Literature</option>
 
 
 
 
 
-                            </select>
-                            <div class="mb-3">
-                              <label id="label" for="exampleFormControlTextarea1" class="form-label">Background(Optional)</label>
-                              <textarea id="in" class="form-control" type="text" placeholder="Add information revelant to your discussion. Add information about the parameters of this discussion here." name="background" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                              <label id="label" for="formFile" class="form-label">Add Image</label>
-                              <input id="file" class="form-control" name="file" type="file" id="formFile">
-                              <input id="button" type="submit" value="Upload">
-                            </div>
-                          </form>
-                        </div>
+                  </select>
+                  <div class="mb-3">
+                    <label id="label" for="exampleFormControlTextarea1" class="form-label">Background(Optional)</label>
+                    <textarea id="in" class="form-control" type="text" placeholder="Add information revelant to your discussion. Add information about the parameters of this discussion here." name="background" id="exampleFormControlTextarea1"
+                      rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label id="label" for="formFile" class="form-label">Add Image</label>
+                    <input id="file" class="form-control" name="file" type="file" id="formFile">
+                    <input id="button" type="submit" value="Upload">
+                  </div>
+                </form>
+              </div>
 
-                </div>
+            </div>
 
 
-                <footer>
+            <footer>
 
-                </footer>
-              </article>
-
-          </div>
-
-        <!-- Footer -->
-
+            </footer>
+        </article>
 
       </div>
 
+      <!-- Footer -->
+
+
+    </div>
+
     <!-- Scripts -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/browser.min.js"></script>
-      <script src="assets/js/breakpoints.min.js"></script>
-      <script src="assets/js/util.js"></script>
-      <script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
   </body>
 </body>
+
 </html>

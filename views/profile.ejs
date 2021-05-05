@@ -1,167 +1,171 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+  <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 
 </head>
+
 <body class="single is-preload">
 
   <!-- Wrapper -->
-    <div id="wrapper">
+  <div id="wrapper">
 
-      <!-- Header -->
-        <header id="header">
-          <h1><a href="/">GroupThought</a></h1>
-          <nav class="links">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/explore">Explore</a></li>
-              <li><a href="/create">Create</a></li>
-            </ul>
-          </nav>
-          <nav class="main">
-            <ul>
+    <!-- Header -->
+    <header id="header">
+      <h1><a href="/">GroupThought</a></h1>
+      <nav class="links">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/explore">Explore</a></li>
+          <li><a href="/create">Create</a></li>
+        </ul>
+      </nav>
+      <nav class="main">
+        <ul>
 
-              <li class="menu">
-                <a class="fa-bars" href="#menu">Menu</a>
-              </li>
-            </ul>
-          </nav>
+          <li class="menu">
+            <a class="fa-bars" href="#menu">Menu</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Menu -->
+    <section id="menu">
+
+      <!-- Search -->
+
+
+      <!-- Links -->
+      <section>
+        <ul class="links">
+          <li>
+            <a href="/">
+              <h3>Home</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/explore">
+              <h3>Explore</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/create">
+              <h3>Create</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/profile">
+              <h3>Profile</h3>
+            </a>
+          </li>
+          <li>
+            <a href="/signup">
+              <h3>Sign Up</h3>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Actions -->
+      <section>
+        <ul class="actions stacked">
+          <li><a href="/login" class="button large fit">Log In</a></li>
+        </ul>
+      </section>
+
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Post -->
+      <article id="profileCon" class="post">
+        <header>
+          <div id="headers" class="title">
+            <h2 id="hAct"><a href="/profile">Profile Page</a></h2>
+            <h3 id="hAct"><a href="/profile">Activity</a></h3>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+          </div>
         </header>
+        <ul class="nav nav-tabs" id="nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/account">Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/follow/<%= user._id %>">Following</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Activity</a>
+          </li>
+        </ul>
 
-      <!-- Menu -->
-        <section id="menu">
+        <div class="container">
+          <div class="row" id="profileBox">
+            <!-- LOCAL INFORMATION -->
+            <div class="col-sm-6" id="localBox">
+              <h2 id="htwo">Created Discussions</h2>
+              <ul class="messages scroll hideList">
+                <% for(var i=0; i<messages.length; i++) {%>
+                <%  if (messages[i].userName === user.local.username) { %>
+                <li id="<%= messages[i]._id%>" class="message proLi">
 
-          <!-- Search -->
+
+                  <article class="mini-post">
+                    <header>
+                      <a href="/stage/<%=messages[i]._id %>">
+                        <h3 class="Title"><strong>Title: </strong><%= messages[i].dicuss %></h3>
+                      </a>
+                      <time class="published time name" datetime="2015-10-20"><strong>Time: </strong><%= helpers.getDate(messages[i].timestamp) %></time>
+                      <span class="name hid"><strong>Author: </strong><%= messages[i].userName %></span>
+                      <span class="icon solid postThumb numPost icons"><strong>Likes: </strong><%= messages[i].thumbUp %></span>
+                      <span class="icons"><i class="fa fa-trash trash postTrash" aria-hidden="true"></i></span>
+                      <span id="Id" class="hid"><%=messages[i]._id %></span>
+                    </header>
+                    <img id="images" src="<%= messages[i].img %>" alt="" />
 
 
-          <!-- Links -->
-            <section>
-              <ul class="links">
-                <li>
-                  <a href="/">
-                    <h3>Home</h3>
-                  </a>
+                  </article>
                 </li>
-                <li>
-                  <a href="/explore">
-                    <h3>Explore</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="/create">
-                    <h3>Create</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="/profile">
-                    <h3>Profile</h3>
-                  </a>
-                </li>
-                <li>
-                  <a href="/signup">
-                    <h3>Sign Up</h3>
-                  </a>
-                </li>
+
+                <% }} %>
               </ul>
-            </section>
 
-          <!-- Actions -->
-            <section>
-              <ul class="actions stacked">
-                <li><a href="/login" class="button large fit">Log In</a></li>
+            </div>
+            <div class="col-sm-6" id="actBox">
+              <h2 id="htwo">Created Comments</h2>
+
+              <ul class="comments scroll hideList">
+                <% for(var i=0; i<comments.length; i++) {%>
+                <%  if (comments[i].userName === user.local.username) { %>
+
+                <li class="comments box">
+                  <article class="mini-post">
+                    <header>
+                      <h3 id="h"><a href="#" class="side title"><strong>Side:</strong><%= comments[i].side %></a></h3>
+                      <h3 id="h"><a href="/stage/<%=comments[i].msgId %>" class="msg"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
+                      <h2><a href="#" class="author"><strong>Author:</strong><%= comments[i].userName %></a></h2>
+                      <h3 class="icons"><a href="#" class="icon solid comThumb icons"><strong>Likes: </strong><%= comments[i].thumbUp %></a></h3>
+                      <h3 class="icons"><i class="fa fa-trash comTrash trash" aria-hidden="true"></i></h3>
+                      <h3><a href="#" class="comId hid"><%= comments[i]._id %></a></h3>
+                    </header>
+                    <footer>
+
+                    </footer>
+                  </article>
+                </li>
+                <% }} %>
               </ul>
-            </section>
-
-        </section>
-
-      <!-- Main -->
-        <div id="main">
-
-          <!-- Post -->
-            <article id="profileCon" class="post">
-              <header>
-                <div id="headers" class="title">
-                  <h2 id="hAct"><a href="/profile">Profile Page</a></h2>
-                  <h3 id="hAct"><a href="/profile">Activity</a></h3>
-                  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-                </div>
-              </header>
-                <ul class="nav nav-tabs" id="nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/account">Account</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/follow/<%= user._id %>">Following</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/profile">Activity</a>
-                  </li>
-                </ul>
-
-              <div class="container">
-                  <div class="row" id="profileBox">
-                      <!-- LOCAL INFORMATION -->
-                      <div class="col-sm-6" id="localBox">
-                        <h2 id="htwo">Created Discussions</h2>
-                        <ul class="messages scroll hideList">
-                        <% for(var i=0; i<messages.length; i++) {%>
-                        <%  if (messages[i].userName === user.local.username) { %>
-                          <li id="<%= messages[i]._id%>" class="message proLi">
-
-
-                            <article class="mini-post">
-                              <header>
-                                <a href="/stage/<%=messages[i]._id %>"><h3 class="Title"><strong>Title: </strong><%= messages[i].dicuss %></h3></a>
-                                <time class="published time name" datetime="2015-10-20"><strong>Time: </strong><%= helpers.getDate(messages[i].timestamp) %></time>
-                                <span class="name hid"><strong>Author: </strong><%= messages[i].userName %></span>
-                                <span class="icon solid postThumb numPost icons"><strong>Likes: </strong><%= messages[i].thumbUp %></span>
-                                <span class="icons"><i class="fa fa-trash trash postTrash" aria-hidden="true"></i></span>
-                                <span id="Id" class="hid"><%=messages[i]._id %></span>
-                              </header>
-                              <img id="images" src="<%= messages[i].img %>" alt="" />
-
-
-                            </article>
-                          </li>
-
-                        <% }} %>
-                        </ul>
-
-                      </div>
-                      <div class="col-sm-6" id="actBox">
-                        <h2 id="htwo">Created Comments</h2>
-
-                        <ul class="comments scroll hideList">
-                        <% for(var i=0; i<comments.length; i++) {%>
-                          <%  if (comments[i].userName === user.local.username) { %>
-
-                          <li class="comments box">
-                            <article class="mini-post">
-                              <header>
-                                <h3 id="h"><a href="#" class="side title"><strong>Side:</strong><%= comments[i].side %></a></h3>
-                                <h3 id="h"><a href="/stage/<%=comments[i].msgId %>" class="msg"><strong>Comment:</strong><%= comments[i].msg %></a></h3>
-                                <h2><a href="#" class="author"><strong>Author:</strong><%= comments[i].userName %></a></h2>
-                                <h3 class="icons"><a href="#" class="icon solid comThumb icons"><strong>Likes: </strong><%= comments[i].thumbUp %></a></h3>
-                                <h3 class="icons"><i class="fa fa-trash comTrash trash" aria-hidden="true"></i></h3>
-                                <h3><a href="#" class="comId hid"><%= comments[i]._id %></a></h3>
-                              </header>
-                              <footer>
-
-                              </footer>
-                            </article>
-                          </li>
-                        <% }} %>
-                        </ul>
-                      </div>
-                    </div>
-                    <!-- <div class="row">
+            </div>
+          </div>
+          <!-- <div class="row">
                         LOCAL INFORMATION
                         <div class="col-sm-6 well">
                               <h3><a href="/topic">List Of Recommended Posts</a></h3>
@@ -214,18 +218,19 @@
                   </article>
                 </div> -->
 
-      <!-- Footer -->
+          <!-- Footer -->
 
 
-    </div>
+        </div>
 
-  <!-- Scripts -->
-  	<script src="/main.js"></script>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-    <script src="/assets/js/util.js"></script>
-    <script src="/assets/js/main.js"></script>
+        <!-- Scripts -->
+        <script src="/main.js"></script>
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/browser.min.js"></script>
+        <script src="/assets/js/breakpoints.min.js"></script>
+        <script src="/assets/js/util.js"></script>
+        <script src="/assets/js/main.js"></script>
 
 </body>
+
 </html>

@@ -1,151 +1,141 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>Create</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css"/>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+  <title>Create</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
+
 <body>
+
   <body id="comBody" class="single is-preload">
 
     <!-- Wrapper -->
-      <div id="wrapper">
+    <div id="wrapper">
 
-        <!-- Header -->
-          <header id="header">
-            <h1><a href="/">GroupThought</a></h1>
-            <nav class="links">
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/explore">Explore</a></li>
-                <li><a href="/create" type="submit" >Create</a></li>
-                <!-- <li><a href="#">Tempus</a></li>
-                <li><a href="#">Adipiscing</a></li> -->
-              </ul>
-            </nav>
-            <nav class="main">
-              <ul>
+      <!-- Header -->
+      <header id="header">
+        <h1><a href="/">GroupThought</a></h1>
+        <nav class="links">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/explore">Explore</a></li>
+            <li><a href="/create" type="submit">Create</a></li>
+          </ul>
+        </nav>
+        <nav class="main">
+          <ul>
 
-                <li class="menu">
-                  <a class="fa-bars" href="#menu">Menu</a>
-                </li>
-              </ul>
-            </nav>
+            <li class="menu">
+              <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Menu -->
+      <section id="menu">
+        <!-- Search -->
+
+        <!-- Links -->
+        <section>
+          <ul class="links">
+            <li>
+              <a href="/">
+                <h3>Home</h3>
+                <p>Feugiat tempus veroeros dolor</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <h3>Explore</h3>
+                <p>Sed vitae justo condimentum</p>
+              </a>
+            </li>
+            <li>
+              <a href="/create">
+                <h3>Create</h3>
+                <p>Phasellus sed ultricies mi congue</p>
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <h3>SIGNUP</h3>
+                <p>Porta lectus amet ultricies</p>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Actions -->
+        <section>
+          <ul class="actions stacked">
+            <li><a href="#" class="button large fit">Log In</a></li>
+          </ul>
+        </section>
+      </section>
+
+      <!-- Main -->
+      <div id="mainCom">
+
+        <!-- Post -->
+        <article id="commentCon" class="post">
+          <header>
+            <div class="title">
+              <h2><a href="#">comments</a></h2>
+              <p>Create A New Discussion</p>
+            </div>
+
           </header>
+          <div class="container" id="commentContainer">
 
-        <!-- Menu -->
-          <section id="menu">
+            <div class="page-header text-center">
+              <h1><span class="fa fa-anchor"></span>Add Your Comment Below!</h1>
+              <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
+            </div>
 
-            <!-- Search -->
+            <div class="row">
 
 
-            <!-- Links -->
-              <section>
-                <ul class="links">
-                  <li>
-                    <a href="/">
-                      <h3>Home</h3>
-                      <p>Feugiat tempus veroeros dolor</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <h3>Explore</h3>
-                      <p>Sed vitae justo condimentum</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/create">
-                      <h3>Create</h3>
-                      <p>Phasellus sed ultricies mi congue</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/">
-                      <h3>SIGNUP</h3>
-                      <p>Porta lectus amet ultricies</p>
-                    </a>
-                  </li>
-                </ul>
-              </section>
+              <div class="col-sm-6" id="commentForm">
+                <h3>Add a Comment</h3>
 
-            <!-- Actions -->
-              <section>
-                <ul class="actions stacked">
-                  <li><a href="#" class="button large fit">Log In</a></li>
-                </ul>
-              </section>
-
-          </section>
-
-        <!-- Main -->
-          <div id="mainCom">
-
-            <!-- Post -->
-              <article id="commentCon" class="post">
-                <header>
-                  <div class="title">
-                    <h2><a href="#">comments</a></h2>
-                    <p>Create A New Discussion</p>
+                <% if (user.local.email) { %>
+                <form action="/comments" method="POST">
+                  <div class="mb-3">
+                    <label id="label" for="exampleFormControlTextarea1" class="form-label">What you think?</label>
+                    <textarea id="in" class="form-control" type="text" placeholder="Add Your Comment" name="msg" id="exampleFormControlTextarea1" rows="3"></textarea>
                   </div>
-
-                </header>
-                <div class="container" id="commentContainer">
-
-                    <div class="page-header text-center">
-                        <h1><span class="fa fa-anchor"></span>Add Your Comment Below!</h1>
-                        <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
-                    </div>
-
-                    <div class="row">
-
-
-                      <div class="col-sm-6" id="commentForm">
-                        <h3>Add a Comment</h3>
-
-                      <% if (user.local.email) { %>
-                        <form action="/comments" method="POST">
-                          <div class="mb-3">
-                            <label id="label" for="exampleFormControlTextarea1" class="form-label">What you think?</label>
-                            <textarea id="in" class="form-control" type="text" placeholder="Add Your Comment" name="msg" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
-                          <select id="select" name="side">
-                            <option selected>Choose...</option>
-                            <option value="Pro">For</option>
-                            <option value="Con">Against</option>
-                          </select>
-                          
-                          <input  type="hidden" name="msgId" value="<%= msgId %>">
-                          <button id="sumbit" type="submit">Submit</button>
-                        </form>
-                      </div>
-                      <% } %>
-
-
-                </div>
-
-
-              </article>
-
-          </div>
-
-        <!-- Footer -->
-
-
+                  <select id="select" name="side">
+                    <option selected>Choose...</option>
+                    <option value="Pro">For</option>
+                    <option value="Con">Against</option>
+                  </select>
+                  <input type="hidden" name="msgId" value="<%= msgId %>">
+                  <button id="sumbit" type="submit">Submit</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+        </article>
       </div>
+      <!-- Footer -->
+    </div>
 
     <!-- Scripts -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/browser.min.js"></script>
-      <script src="assets/js/breakpoints.min.js"></script>
-      <script src="assets/js/util.js"></script>
-      <script src="assets/js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
   </body>
 </body>
+
 </html>
