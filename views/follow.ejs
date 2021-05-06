@@ -16,11 +16,8 @@
 
 <body class="is-preload">
   <div class="container">
-
-
     <!-- Wrapper -->
     <div id="wrapper">
-
       <!-- Header -->
       <header id="header">
         <h1><a href="/">GroupThought</a></h1>
@@ -40,13 +37,8 @@
           </ul>
         </nav>
       </header>
-
       <!-- Menu -->
       <section id="menu">
-
-        <!-- Search -->
-
-
         <!-- Links -->
         <section>
           <ul class="links">
@@ -87,7 +79,6 @@
 
       </section>
 
-      <!-- Main this is where i want the most popular post to show up -->
       <div class="popularPosts" id="main">
         <!-- This line is interchangeable -->
         <ul class="nav nav-tabs" id="nav">
@@ -101,7 +92,7 @@
             <a class="nav-link" href="/profile">Activity</a>
           </li>
         </ul>
-        <h2><strong>Following:</strong> List of Posts</h2>
+        <h2><strong>Following:</strong> List of The Posts You Follow</h2>
         <!-- Post -->
 
         <ul class="hideList">
@@ -127,17 +118,14 @@
                   <li><a href="#"><strong>Topic Tag: </strong></a><%= messages[i].tag %></li>
                   <li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong></a><%= messages[i].thumbUp %></li>
                   <li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
-                  <!-- <li><a href="#" class="icon solid fa-comment"><strong># Of Views</strong></a></li> -->
                 </ul>
               </footer>
             </article>
           </li>
           <% } %>
         </ul>
-
       </div>
     </div>
-
   </div>
   <script src="/assets/js/jquery.min.js"></script>
   <script src="/assets/js/browser.min.js"></script>

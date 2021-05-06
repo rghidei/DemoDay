@@ -8,18 +8,12 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="style.css" />
-
-
-
 </head>
 
 <body class="is-preload">
   <div class="container">
-
-
     <!-- Wrapper -->
     <div id="wrapper">
-
       <!-- Header -->
       <header id="header">
         <h1><a href="/">GroupThought</a></h1>
@@ -41,14 +35,6 @@
 
       <!-- Menu -->
       <section id="menu">
-
-        <!-- Search -->
-        <!-- <section>
-  								<form class="search" method="get" action="#">
-  									<input type="text" name="query" placeholder="Search" />
-  								</form>
-  							</section> -->
-
         <!-- Links -->
         <section>
           <ul class="links">
@@ -74,7 +60,7 @@
             </li>
             <li>
               <a href="/signup">
-                <h3>SIGNUP</h3>
+                <h3>SignUp</h3>
               </a>
             </li>
           </ul>
@@ -87,14 +73,10 @@
           </ul>
         </section>
       </section>
-
-
-
       <!-- Main this is where i want the most popular post to show up -->
       <div class="popularPosts" id="main">
         <h2>Popular Posts</h2>
         <!-- Post -->
-
         <% for(var i=0; i<postsByLikes.length; i++) {%>
         <ul class="hideList">
           <li>
@@ -118,7 +100,7 @@
                 <ul class="stats">
                   <li><a href="#"><strong>Topic Tag: </strong><%= postsByLikes[i].tag %></a></li>
                   <li><a href="#" class="icon solid fa-heart"><strong># Of Likes: </strong><%= postsByLikes[i].thumbUp %></a></li>
-                  <li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong></a></li>
+                  <li><a href="#" class="icon solid fa-comment"><strong># Of Comments</strong> 4</a></li>
                   <li>
                     <form class="hid" action="javascript:void(0)" method="put">
                       <button data-userId="<%= user._id %>" class="followBtn" type="submit"><strong>Follow Debate</strong></button>
@@ -131,10 +113,8 @@
         </ul>
         <% } %>
       </div>
-
       <!-- Sidebar -->
       <section id="sidebar">
-
         <!-- Intro -->
         <section id="intro">
           <a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
@@ -143,14 +123,10 @@
             <p>GroupThought is designed to facilitate constructive discussion about the most important issues in the world.</p>
           </header>
         </section>
-
         <!-- LIST OF TOP 4 RECENT POSTS -->
         <section class="recentPost">
           <h2>Recent Posts</h2>
           <div class="mini-posts">
-
-
-            <!-- 3 Mini Post -->
             <% for(var i=0; i<messages.length && i < 5; i++) {%>
             <ol class="hideList">
               <li>
@@ -158,77 +134,30 @@
                   <header>
                     <h3 id="h"><a href="/stage/<%=messages[i]._id %>"><strong>Title:</strong><%= messages[i].dicuss %></a></h3>
                     <time class="published" datetime="2015-10-20"><strong>Time:</strong><%= helpers.getDate(messages[i].timestamp) %></time>
-                    <span><a href="#"><strong>Author: </strong><%= messages[i].userName %></a></span>
+                    <span><a href="#"><strong>Name: </strong><%= messages[i].userName %></a></span>
                   </header>
                   <a href="#" class="image"><img src="<%= messages[i].img %>" alt="" /></a>
                 </article>
               </li>
             </ol>
             <% } %>
-            <!-- 4 Mini Post -->
-
-
-            <!-- Posts List -->
-            <!-- LIST OF TOP USERS -->
-            <!-- <section class="top5">
-                  <h2>Top 5 Users</h2>
-  								<ul class="posts">
-  									<li>
-  											<header>
-  												<h3><strong>Number of Posts:</strong><%= postsByLikes.length %></h3>
-  											</header>
-  									</li>
-  									<li>
-                        <header>
-                          <h3><strong>Number of Comments: </strong></h3>
-                        </header>
-  									</li>
-  									<li>
-                        <header>
-  												<h3><strong>Number of Users: </strong></h3>
-  											</header>
-  									</li>
-  								</ul>
-  							</section> -->
-
             <!-- About -->
             <section class="blurb">
               <h2>About</h2>
               <p>A tool to engage in thoughtful discussion, understand different points of view, and help with collaborative decision-making.
                 Where users will be able to see and provide thorough and thoughtful arguments that support and do not support the topic at hand.
               </p>
-              <ul class="actions">
-                <li><a href="#" class="button">Learn More</a></li>
-              </ul>
             </section>
-
-            <!-- Footer -->
-            <!-- <section id="footer">
-  								<ul class="icons">
-  									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-  									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-  									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-  									<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-  									<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-  								</ul>
-  							</section> -->
-
         </section>
-
     </div>
-
   </div>
-
   </div>
-  <script src="/follow.js"></script>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/browser.min.js"></script>
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="/follow.js"></script>
-
-
 </body>
 
 </html>

@@ -12,13 +12,10 @@ module.exports = function(app, passport, db, ObjectID) {
     }).toArray((err, recResult) => {
       if (err) return console.log(err)
       db.collection('messages').find().toArray((err, popResult) => {
-
         var postsByLikes = popResult.sort(function(postA, postB) {
           /** all the code above to sort the posts in the variable named `results` by Likes */
           const A_COMES_BEFORE_B = -1;
           const B_COMES_BEFORE_A = 1;
-          // console.log(postA.thumbUp, postB.thumbUp)
-
           if (postA.thumbUp > postB.thumbUp) {
             return A_COMES_BEFORE_B;
           } else {
@@ -97,15 +94,12 @@ module.exports = function(app, passport, db, ObjectID) {
           /** all the code above to sort the posts in the variable named `results` by Likes */
           const A_COMES_BEFORE_B = -1;
           const B_COMES_BEFORE_A = 1;
-          // console.log(comA.thumbUp, comB.thumbUp)
-
           if (comA.thumbUp > comB.thumbUp) {
             return A_COMES_BEFORE_B;
           } else {
             return B_COMES_BEFORE_A;
           }
         });
-        // console.log(comsByLikes)
         if (err) return console.log(err)
         res.render('stage.ejs', {
           user: req.user,
@@ -117,7 +111,6 @@ module.exports = function(app, passport, db, ObjectID) {
     })
 
   });
-
 
   //COMMENTS
   app.get('/comments/:msgId', isLoggedIn, function(req, res) {
@@ -148,7 +141,7 @@ module.exports = function(app, passport, db, ObjectID) {
       })
     })
   });
-
+  //account
   app.get('/account', isLoggedIn, function(req, res) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
@@ -214,10 +207,6 @@ module.exports = function(app, passport, db, ObjectID) {
   })
 
   app.put('/messages', (req, res) => {
-    // console.log(req.body.postId, ObjectID(req.body.postId), "put")
-    // console.log(typeof req.body.postId)
-    // console.log(req.body.postId)
-    // console.log(req.body.thumbUp)
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -235,26 +224,8 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
-  app.put('/cindy', (req, res) => {
-    db.collection('comments')
-      .findOneAndUpdate({
-        _id: ObjectID(req.body.comId)
-      }, {
-        $set: {
-          thumbUp: req.body.thumbUp + 1
-        }
-      }, {
-        sort: {
-          _id: -1
-        },
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-  })
-  //bob = post
-  app.put('/stage/bob', (req, res) => {
+
+  app.put('/stage/stagePost', (req, res) => {
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -272,8 +243,8 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
-  //greg = com
-  app.put('/stage/greg', (req, res) => {
+
+  app.put('/stage/stageCom', (req, res) => {
     db.collection('comments')
       .findOneAndUpdate({
         _id: ObjectID(req.body.comId)
@@ -313,7 +284,6 @@ module.exports = function(app, passport, db, ObjectID) {
         console.log(`this is my ${result}: userId = ${userId}`)
         if (err) return res.send(err)
         res.send(result)
-        // res.redirect(303, '/follow/' + userId)
       })
   })
 

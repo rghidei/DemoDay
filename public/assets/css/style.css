@@ -23,7 +23,7 @@ s  box-sizing: border-box;
 
 }
 
-.jerry{
+.allComments{
   display: flex;
   position: relative;
   right: 28px;
@@ -62,7 +62,7 @@ s  box-sizing: border-box;
 }
 #nav{
   background-color: white;
-  width: 40%;
+  width: 26%;
   margin: 5% auto;
 }
 

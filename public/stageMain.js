@@ -1,18 +1,15 @@
-//stage ejs
 var commenThumbUp = document.getElementsByClassName("commentThumb");
 
 document.querySelector('.stageT').addEventListener('click', addLike)
 
 
 function addLike() {
-  console.log('panda2')
   const tag = this.parentNode.parentNode.querySelector('.tagStage').innerText
   const dicuss = this.parentNode.parentNode.querySelector('#discussion').innerText
   const background = this.parentNode.parentNode.querySelector('.infoStage').innerText
   const postId = this.parentNode.parentNode.querySelector('.postIdStage span').innerText
   const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbStage').innerText)
-  console.log(tag, dicuss, background, postId, thumbUp)
-  fetch('bob', {
+  fetch('stagePost', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json'
@@ -37,13 +34,11 @@ function addLike() {
 
 Array.from(commenThumbUp).forEach(function(element) {
   element.addEventListener('click', function() {
-    console.log('panda3')
     const msg = this.parentNode.parentNode.querySelector('.msg').innerText
     const side = this.parentNode.parentNode.querySelector('.side').innerText
     const comId = this.parentNode.parentNode.querySelector('.comId span').innerText
     const thumbUp = parseFloat(this.parentNode.parentNode.querySelector('.thumbComments').innerText)
-    console.log(msg, side, comId, thumbUp)
-    fetch('greg', {
+    fetch('stageCom', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json'

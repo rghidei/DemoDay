@@ -13,10 +13,8 @@
 </head>
 
 <body class="single is-preload">
-
   <!-- Wrapper -->
   <div id="wrapper">
-
     <!-- Header -->
     <header id="header">
       <h1><a href="/">GroupThought</a></h1>
@@ -29,20 +27,14 @@
       </nav>
       <nav class="main">
         <ul>
-
           <li class="menu">
             <a class="fa-bars" href="#menu">Menu</a>
           </li>
         </ul>
       </nav>
     </header>
-
     <!-- Menu -->
     <section id="menu">
-
-      <!-- Search -->
-
-
       <!-- Links -->
       <section>
         <ul class="links">
@@ -80,12 +72,9 @@
           <li><a href="/login" class="button large fit">Log In</a></li>
         </ul>
       </section>
-
     </section>
-
     <!-- Main -->
     <div id="main">
-
       <!-- Post -->
       <article id="profileCon" class="post">
         <header>
@@ -106,7 +95,6 @@
             <a class="nav-link" href="/profile">Activity</a>
           </li>
         </ul>
-
         <div class="container">
           <div class="row" id="profileBox">
             <!-- LOCAL INFORMATION -->
@@ -116,8 +104,6 @@
                 <% for(var i=0; i<messages.length; i++) {%>
                 <%  if (messages[i].userName === user.local.username) { %>
                 <li id="<%= messages[i]._id%>" class="message proLi">
-
-
                   <article class="mini-post">
                     <header>
                       <a href="/stage/<%=messages[i]._id %>">
@@ -130,22 +116,16 @@
                       <span id="Id" class="hid"><%=messages[i]._id %></span>
                     </header>
                     <img id="images" src="<%= messages[i].img %>" alt="" />
-
-
                   </article>
                 </li>
-
                 <% }} %>
               </ul>
-
             </div>
             <div class="col-sm-6" id="actBox">
               <h2 id="htwo">Created Comments</h2>
-
               <ul class="comments scroll hideList">
                 <% for(var i=0; i<comments.length; i++) {%>
                 <%  if (comments[i].userName === user.local.username) { %>
-
                 <li class="comments box">
                   <article class="mini-post">
                     <header>
@@ -156,73 +136,13 @@
                       <h3 class="icons"><i class="fa fa-trash comTrash trash" aria-hidden="true"></i></h3>
                       <h3><a href="#" class="comId hid"><%= comments[i]._id %></a></h3>
                     </header>
-                    <footer>
-
-                    </footer>
                   </article>
                 </li>
                 <% }} %>
               </ul>
             </div>
           </div>
-          <!-- <div class="row">
-                        LOCAL INFORMATION
-                        <div class="col-sm-6 well">
-                              <h3><a href="/topic">List Of Recommended Posts</a></h3>
-                              <article class="mini-post">
-          											<header>
-          												<h3><a href="#"><strong>Title:</strong></a></h3>
-          												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-                                  <a href="#" class="author"><strong>Author:</strong></a>
-          												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
-          											</header>
-          											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-          										</article>
-                            </div>
-                        <div class="col-sm-6 well">
-                          <h3><a href="/topic">List Of Recently Viewed Posts</a></h3>
-                          <article class="mini-post">
-      											<header>
-      												<h3><a href="#"><strong>Title:</strong></a></h3>
-      												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-      												<a href="#" class="author"><strong>Author:</strong></a>
-      											</header>
-      											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-      										</article>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-6 well">
-                                <h3><a href="/topic">List Of Follwer's Posts</a></h3>
-                                <article class="mini-post">
-            											<header>
-            												<h3><a href="#"><strong>Title:</strong></a></h3>
-            												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-            												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
-            											</header>
-            											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-            										</article>
-                              </div>
-                          <div class="col-sm-6 well">
-                            <h3><a href="/topic">List Of Discussions you added too</a></h3>
-                            <article class="mini-post">
-        											<header>
-        												<h3><a href="#"><strong>Title:</strong></a></h3>
-        												<time class="published" datetime="2015-10-20"><strong>Time:</strong></time>
-        												<a href="#" class="author"><strong>Author:</strong><img src="images/avatar.jpg" alt="" /></a>
-        											</header>
-        											<a href="#" class="image"><strong>Img:</strong><img src="images/pic04.jpg" alt="" /></a>
-        										</article>
-                          </div>
-                        </div>
-                  </article>
-                </div> -->
-
-          <!-- Footer -->
-
-
         </div>
-
         <!-- Scripts -->
         <script src="/main.js"></script>
         <script src="/assets/js/jquery.min.js"></script>
@@ -230,7 +150,6 @@
         <script src="/assets/js/breakpoints.min.js"></script>
         <script src="/assets/js/util.js"></script>
         <script src="/assets/js/main.js"></script>
-
 </body>
 
 </html>

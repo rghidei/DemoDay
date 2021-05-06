@@ -41,39 +41,32 @@
     <section id="menu">
 
       <!-- Search -->
-
-
       <!-- Links -->
       <section>
         <ul class="links">
           <li>
             <a href="/">
               <h3>Home</h3>
-              <p>Feugiat tempus veroeros dolor</p>
             </a>
           </li>
           <li>
             <a href="/explore">
               <h3>Explore</h3>
-              <p>Sed vitae justo condimentum</p>
             </a>
           </li>
           <li>
             <a href="/create">
               <h3>Create</h3>
-              <p>Phasellus sed ultricies mi congue</p>
             </a>
           </li>
           <li>
             <a href="/profile">
               <h3>Profile</h3>
-              <p>Porta lectus amet ultricies</p>
             </a>
           </li>
           <li>
             <a href="/signup">
               <h3>Sign Up</h3>
-              <p>Porta lectus amet ultricies</p>
             </a>
           </li>
         </ul>
@@ -95,24 +88,20 @@
       <article id="stageCon" class="post">
         <header id="headHeader">
           <div id="headers" class="title">
-            <h1 id="hone"><span class="fa fa-heart"></span> Stage Page</h1>
+            <h1 id="hone">Stage Page</h1>
             <a href="/profile" class="btnStage btn btn-default btn-sm">Back to Profile</a>
-
           </div>
-
         </header>
-
         <div class="container">
-
           <div id="pageHeader" class="page-header text-center">
             <h3 id="hthree">Discussion Statement</h3>
             <div id="postBox">
               <h3 id="discussion"><%= message.dicuss %></h3>
               <p class="infoStage"><strong>Background: </strong><%= message.background %></p>
               <p class="postIdStage hid"><span><%= message._id %></span></p>
-              <span class="userStage"><strong>Username: </strong><%= message.userName %></span>
+              <span class="userStage"><strong>Name: </strong><%= message.userName %></span>
               <span class="tagStage"><strong>Topic Tag: </strong><%= message.tag %></span>
-              <span class="time name"><strong>Posted: </strong><%= helpers.getDate(message.timestamp) %></span>
+              <span class="time name"><strong>Time: </strong><%= helpers.getDate(message.timestamp) %></span>
               <span id="span1"><i class="fa fa-thumbs-up stageT" aria-hidden="true"></i></span>
               <span id="span1" class="thumbStage"><%= message.thumbUp %></span>
               <a href="/comments/<%=message._id %>" class="btn btn-default btn-sm">Add A Comment</a>
@@ -120,8 +109,7 @@
           </div>
 
           <!-- LIST OF COMMENTS pROS AND CONS  -->
-          <div class="jerry">
-
+          <div class="allComments">
             <div class="pro">
               <h2 id="htwo">For</h2>
               <ul class="comments hideList">
@@ -131,7 +119,7 @@
                   <article class="mini-post">
                     <header>
                       <h3 id="h"><a href="#" class="msg"><strong>Comment: </strong><%= comsByLikes[i].msg %></a></h3>
-                      <h3 id="h"><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+                      <h3 id="h"><a href="#" class="author userStage"><strong>Name:</strong><%= comsByLikes[i].userName %></a></h2>
                         <span><a href="#" class="time"><strong>Time: </strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></span>
                         <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
                         <span class="thumbComments"><%= comsByLikes[i].thumbUp %></span>
@@ -151,41 +139,24 @@
                 <li class="comments box">
                   <article class="mini-post">
                     <header>
-
                       <h3 id="h"><a href="#" class="msg"><strong>Comment:</strong><%= comsByLikes[i].msg %></a></h3>
-                      <h3 id="h"><a href="#" class="author userStage"><strong>Author:</strong><%= comsByLikes[i].userName %></a></h2>
+                      <h3 id="h"><a href="#" class="author userStage"><strong>Name:</strong><%= comsByLikes[i].userName %></a></h2>
                         <span><a href="#" class="time"><strong>Time:</strong><%= helpers.getDate(comsByLikes[i].timestamp) %></a></span>
                         <span><i class="fa fa-thumbs-up commentThumb" aria-hidden="true"></i></span>
                         <span><a href="#" class="thumbComments"><%= comsByLikes[i].thumbUp %></a></span>
                         <span class="hide side"><%= comsByLikes[i].side %></span>
                         <span class="comId hide"><span><%= comsByLikes[i]._id %></span></span>
                     </header>
-                    <footer>
-
-                    </footer>
                   </article>
                 </li>
                 <% }} %>
               </ul>
             </div>
           </div>
-
-
-
-
-
-
         </div>
-
       </article>
-
     </div>
-
-    <!-- Footer -->
-
-
   </div>
-
   <!-- Scripts -->
   <script src="/stageMain.js"></script>
   <script src="/assets/js/jquery.min.js"></script>
