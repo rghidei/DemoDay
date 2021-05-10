@@ -1,7 +1,5 @@
 module.exports = function(app, passport, db, ObjectID) {
-  const {
-    ObjectId
-  } = require('mongodb');
+  const {ObjectId} = require('mongodb');
   const helpers = require('./helpers.js')
   // normal routes ===============================================================
 
@@ -22,7 +20,6 @@ module.exports = function(app, passport, db, ObjectID) {
             return B_COMES_BEFORE_A;
           }
         });
-        console.log(postsByLikes.length)
         if (err) return console.log(err)
         res.render('index.ejs', {
           user: req.user,
@@ -40,11 +37,9 @@ module.exports = function(app, passport, db, ObjectID) {
   //Topic
   app.get('/topic/:topic', isLoggedIn, function(req, res) {
     let topicTag = req.params.topic
-    console.log(req.params.topic, topicTag, "kuawii")
     db.collection('messages').find({
       tag: topicTag
     }).toArray((err, result) => {
-      console.log(result, "dua")
       if (err) return console.log(err)
       res.render('topic.ejs', {
         user: req.user,
@@ -58,7 +53,6 @@ module.exports = function(app, passport, db, ObjectID) {
     db.collection('messages').find().toArray((err, msgResult) => {
       if (err) return console.log(err)
       db.collection('comments').find().toArray((err, comResult) => {
-        console.log(comResult.length)
         if (err) return console.log(err)
         res.render('profile.ejs', {
           user: req.user,
@@ -85,7 +79,6 @@ module.exports = function(app, passport, db, ObjectID) {
     db.collection('messages').findOne({
       _id: ObjectId(req.params.msgId)
     }, (err, msgResult) => {
-      // console.log(msgResult, "hello")
       if (err) return console.log(err)
       db.collection('comments').find({
         msgId: req.params.msgId
@@ -128,11 +121,9 @@ module.exports = function(app, passport, db, ObjectID) {
   // Followers
   app.get('/follow/:userId', isLoggedIn, function(req, res) {
     let userId = ObjectId(req.params.userId)
-    console.log('butterfly', userId)
     db.collection('messages').find({
       followers: ObjectId(req.params.userId)
     }).toArray((err, result) => {
-      console.log(result, "fish")
       if (err) return console.log(err)
       res.render('follow.ejs', {
         user: req.user,
@@ -162,11 +153,10 @@ module.exports = function(app, passport, db, ObjectID) {
 
   //create borad
   app.post('/create', (req, res) => {
+    console.log('wow')
     if (req.files) {
-      console.log("usgai", req.files)
       var file = req.files.file
       var fileName = file.name
-      console.log(fileName)
       file.mv('public/uploads/' + fileName, function(err) {
         if (err) {
           res.send(err)
@@ -266,8 +256,6 @@ module.exports = function(app, passport, db, ObjectID) {
   app.put('/follow/add', (req, res) => {
     let userId = req.user._id
     let user = ObjectId(userId)
-    console.log('yellow')
-    console.log(req.body.postId, user)
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -281,14 +269,12 @@ module.exports = function(app, passport, db, ObjectID) {
         },
         upsert: true
       }, (err, result) => {
-        console.log(`this is my ${result}: userId = ${userId}`)
         if (err) return res.send(err)
         res.send(result)
       })
   })
 
   app.delete('/messages', (req, res) => {
-    console.log('friends')
     db.collection('messages').findOneAndDelete({
       _id: ObjectID(req.body.postId)
     }, (err, result) => {
