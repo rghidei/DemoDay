@@ -1,7 +1,5 @@
 module.exports = function(app, passport, db, ObjectID) {
-  const {
-    ObjectId
-  } = require('mongodb');
+  const {ObjectId} = require('mongodb');
   const helpers = require('./helpers.js')
   // normal routes ===============================================================
 
@@ -12,20 +10,16 @@ module.exports = function(app, passport, db, ObjectID) {
     }).toArray((err, recResult) => {
       if (err) return console.log(err)
       db.collection('messages').find().toArray((err, popResult) => {
-
         var postsByLikes = popResult.sort(function(postA, postB) {
           /** all the code above to sort the posts in the variable named `results` by Likes */
           const A_COMES_BEFORE_B = -1;
           const B_COMES_BEFORE_A = 1;
-          // console.log(postA.thumbUp, postB.thumbUp)
-
           if (postA.thumbUp > postB.thumbUp) {
             return A_COMES_BEFORE_B;
           } else {
             return B_COMES_BEFORE_A;
           }
         });
-        console.log(postsByLikes.length)
         if (err) return console.log(err)
         res.render('index.ejs', {
           user: req.user,
@@ -43,11 +37,9 @@ module.exports = function(app, passport, db, ObjectID) {
   //Topic
   app.get('/topic/:topic', isLoggedIn, function(req, res) {
     let topicTag = req.params.topic
-    console.log(req.params.topic, topicTag, "kuawii")
     db.collection('messages').find({
       tag: topicTag
     }).toArray((err, result) => {
-      console.log(result, "dua")
       if (err) return console.log(err)
       res.render('topic.ejs', {
         user: req.user,
@@ -61,7 +53,6 @@ module.exports = function(app, passport, db, ObjectID) {
     db.collection('messages').find().toArray((err, msgResult) => {
       if (err) return console.log(err)
       db.collection('comments').find().toArray((err, comResult) => {
-        console.log(comResult.length)
         if (err) return console.log(err)
         res.render('profile.ejs', {
           user: req.user,
@@ -88,7 +79,6 @@ module.exports = function(app, passport, db, ObjectID) {
     db.collection('messages').findOne({
       _id: ObjectId(req.params.msgId)
     }, (err, msgResult) => {
-      // console.log(msgResult, "hello")
       if (err) return console.log(err)
       db.collection('comments').find({
         msgId: req.params.msgId
@@ -97,15 +87,12 @@ module.exports = function(app, passport, db, ObjectID) {
           /** all the code above to sort the posts in the variable named `results` by Likes */
           const A_COMES_BEFORE_B = -1;
           const B_COMES_BEFORE_A = 1;
-          // console.log(comA.thumbUp, comB.thumbUp)
-
           if (comA.thumbUp > comB.thumbUp) {
             return A_COMES_BEFORE_B;
           } else {
             return B_COMES_BEFORE_A;
           }
         });
-        // console.log(comsByLikes)
         if (err) return console.log(err)
         res.render('stage.ejs', {
           user: req.user,
@@ -117,7 +104,6 @@ module.exports = function(app, passport, db, ObjectID) {
     })
 
   });
-
 
   //COMMENTS
   app.get('/comments/:msgId', isLoggedIn, function(req, res) {
@@ -135,11 +121,9 @@ module.exports = function(app, passport, db, ObjectID) {
   // Followers
   app.get('/follow/:userId', isLoggedIn, function(req, res) {
     let userId = ObjectId(req.params.userId)
-    console.log('butterfly', userId)
     db.collection('messages').find({
       followers: ObjectId(req.params.userId)
     }).toArray((err, result) => {
-      console.log(result, "fish")
       if (err) return console.log(err)
       res.render('follow.ejs', {
         user: req.user,
@@ -148,7 +132,7 @@ module.exports = function(app, passport, db, ObjectID) {
       })
     })
   });
-
+  //account
   app.get('/account', isLoggedIn, function(req, res) {
     db.collection('messages').find().toArray((err, result) => {
       if (err) return console.log(err)
@@ -169,11 +153,10 @@ module.exports = function(app, passport, db, ObjectID) {
 
   //create borad
   app.post('/create', (req, res) => {
+    console.log('wow')
     if (req.files) {
-      console.log("usgai", req.files)
       var file = req.files.file
       var fileName = file.name
-      console.log(fileName)
       file.mv('public/uploads/' + fileName, function(err) {
         if (err) {
           res.send(err)
@@ -231,25 +214,8 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
-  app.put('/cindy', (req, res) => {
-    db.collection('comments')
-      .findOneAndUpdate({
-        _id: ObjectID(req.body.comId)
-      }, {
-        $set: {
-          thumbUp: req.body.thumbUp + 1
-        }
-      }, {
-        sort: {
-          _id: -1
-        },
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-  })
-  app.put('/stage/bob', (req, res) => {
+
+  app.put('/stage/stagePost', (req, res) => {
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -267,8 +233,8 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
-  //greg = com
-  app.put('/stage/greg', (req, res) => {
+
+  app.put('/stage/stageCom', (req, res) => {
     db.collection('comments')
       .findOneAndUpdate({
         _id: ObjectID(req.body.comId)
@@ -290,8 +256,6 @@ module.exports = function(app, passport, db, ObjectID) {
   app.put('/follow/add', (req, res) => {
     let userId = req.user._id
     let user = ObjectId(userId)
-    console.log('yellow')
-    console.log(req.body.postId, user)
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -305,15 +269,12 @@ module.exports = function(app, passport, db, ObjectID) {
         },
         upsert: true
       }, (err, result) => {
-        console.log(`this is my ${result}: userId = ${userId}`)
         if (err) return res.send(err)
         res.send(result)
-        // res.redirect(303, '/follow/' + userId)
       })
   })
 
   app.delete('/messages', (req, res) => {
-    console.log('friends')
     db.collection('messages').findOneAndDelete({
       _id: ObjectID(req.body.postId)
     }, (err, result) => {

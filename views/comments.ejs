@@ -15,10 +15,8 @@
 <body>
 
   <body id="comBody" class="single is-preload">
-
     <!-- Wrapper -->
     <div id="wrapper">
-
       <!-- Header -->
       <header id="header">
         <h1><a href="/">GroupThought</a></h1>
@@ -31,43 +29,35 @@
         </nav>
         <nav class="main">
           <ul>
-
             <li class="menu">
               <a class="fa-bars" href="#menu">Menu</a>
             </li>
           </ul>
         </nav>
       </header>
-
       <!-- Menu -->
       <section id="menu">
-        <!-- Search -->
-
         <!-- Links -->
         <section>
           <ul class="links">
             <li>
               <a href="/">
                 <h3>Home</h3>
-                <p>Feugiat tempus veroeros dolor</p>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/explore">
                 <h3>Explore</h3>
-                <p>Sed vitae justo condimentum</p>
               </a>
             </li>
             <li>
               <a href="/create">
                 <h3>Create</h3>
-                <p>Phasellus sed ultricies mi congue</p>
               </a>
             </li>
             <li>
-              <a href="/">
-                <h3>SIGNUP</h3>
-                <p>Porta lectus amet ultricies</p>
+              <a href="/signup">
+                <h3>Sign Up</h3>
               </a>
             </li>
           </ul>
@@ -76,36 +66,30 @@
         <!-- Actions -->
         <section>
           <ul class="actions stacked">
-            <li><a href="#" class="button large fit">Log In</a></li>
+            <li><a href="/login" class="button large fit">Log In</a></li>
           </ul>
         </section>
       </section>
 
       <!-- Main -->
       <div id="mainCom">
-
         <!-- Post -->
         <article id="commentCon" class="post">
           <header>
             <div class="title">
-              <h2><a href="#">comments</a></h2>
+              <h2><a href="/comments">Comments</a></h2>
               <p>Create A New Discussion</p>
             </div>
 
           </header>
           <div class="container" id="commentContainer">
-
             <div class="page-header text-center">
               <h1><span class="fa fa-anchor"></span>Add Your Comment Below!</h1>
               <a href="/profile"><button class="profileBtn">Back to Profile</button></a>
             </div>
-
             <div class="row">
-
-
               <div class="col-sm-6" id="commentForm">
                 <h3>Add a Comment</h3>
-
                 <% if (user.local.email) { %>
                 <form action="/comments" method="POST">
                   <div class="mb-3">
@@ -127,14 +111,12 @@
       </div>
       <!-- Footer -->
     </div>
-
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/browser.min.js"></script>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-
   </body>
 </body>
 
