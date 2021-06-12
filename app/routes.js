@@ -214,10 +214,6 @@ module.exports = function(app, passport, db, ObjectID) {
   })
 
   app.put('/messages', (req, res) => {
-    // console.log(req.body.postId, ObjectID(req.body.postId), "put")
-    // console.log(typeof req.body.postId)
-    // console.log(req.body.postId)
-    // console.log(req.body.thumbUp)
     db.collection('messages')
       .findOneAndUpdate({
         _id: ObjectID(req.body.postId)
@@ -253,7 +249,6 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
-  //bob = post
   app.put('/stage/bob', (req, res) => {
     db.collection('messages')
       .findOneAndUpdate({
