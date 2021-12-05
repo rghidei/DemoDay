@@ -153,8 +153,8 @@ module.exports = function(app, passport, db, ObjectID) {
 
   //create borad
   app.post('/create', (req, res) => {
-    console.log('wow')
     if (req.files) {
+      console.log(req.files)
       var file = req.files.file
       var fileName = file.name
       file.mv('public/uploads/' + fileName, function(err) {
@@ -182,16 +182,27 @@ module.exports = function(app, passport, db, ObjectID) {
 
   // Stage board
   app.post('/comments', (req, res) => {
-    db.collection('comments').save({
+    if (req.files) {
+      console.log(req.files, "piggy")
+      var file = req.files.file
+      var fileName = file.name
+      console.log(file, fileName, "fresh")
+      file.mv('public/uploads/' + fileName, function(err) {
+        if (err) {
+          res.send(err)
+        }
+      })
+    }
+    db.collection('comments').insertOne({
       userName: req.user.local.username,
       msg: req.body.msg,
       side: req.body.side,
       msgId: req.body.msgId,
+      source: "/uploads/" + fileName,
       thumbUp: 0,
       timestamp: new Date
     }, (err, result) => {
       if (err) return console.log(err)
-      console.log('saved to database', result)
       res.redirect('/stage/' + result.ops[0].msgId)
     })
   })
@@ -252,6 +263,26 @@ module.exports = function(app, passport, db, ObjectID) {
         res.send(result)
       })
   })
+
+  // app.put('', (req, res) => {
+  //   db.collection('comments')
+  //     .findOneAndUpdate({
+  //       _id: ObjectID(req.body.comId)
+  //     }, {
+  //       $set: {
+  //         msg: req.body.msg
+  //       }
+  //     }, {
+  //       sort: {
+  //         _id: -1
+  //       },
+  //       upsert: true
+  //     }, (err, result) => {
+  //       if (err) return res.send(err)
+  //       res.send(result)
+  //     })
+  // })
+
 
   app.put('/follow/add', (req, res) => {
     let userId = req.user._id
